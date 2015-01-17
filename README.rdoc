@@ -1,0 +1,13 @@
+== Treebook
+
+Social media app based on Treehouse course, translated into Rails 4.2+ and RSpec 3+. To do:
+
+* Create statuses
+
+* Implement Devise with user model
+
+* Add tests
+
+* Use custom dark Bootstrap theme (Bootswatch)
+
+* ...
