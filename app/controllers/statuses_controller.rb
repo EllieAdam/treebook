@@ -4,7 +4,7 @@ class StatusesController < ApplicationController
   respond_to :html
 
   def index
-    @statuses = Status.all
+    @statuses = Status.order('created_at desc')
     respond_with(@statuses)
   end
 

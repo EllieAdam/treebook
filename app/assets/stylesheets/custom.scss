@@ -1,0 +1,28 @@
+.page-header h1 {
+  font-size: 2em;
+}
+
+.status {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #1C1E22;
+  border-right: solid 1px #1C1E22;
+  transition: background-color 0.6s;
+  border-radius: 15px;
+  background-color: darken(#272B30, 3%);
+}
+
+.status .admin {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s linear, opacity 0.5s linear;
+}
+
+.status:hover .admin {
+  visibility:visible;
+  opacity: 1;
+}
+
+.status:hover {
+  background-color: lighten(#272B30, 3%);
+}
