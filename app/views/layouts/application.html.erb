@@ -36,12 +36,12 @@
                 <li><a href="#">Profile</a></li>
                 <li><%= link_to "Settings", edit_user_registration_path %>
                   <li class="divider"></li>
-                  <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                  <li><%= link_to "Log Out", logout_path, method: :delete %></li>
                 </ul>
               </li>
               <% else %>
-              <li><%= link_to "Register", new_user_registration_path %></li>
-              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <li><%= link_to "Register", register_path %></li>
+              <li><%= link_to "Log In", login_path %></li>
               <% end %>
 
             </ul>
