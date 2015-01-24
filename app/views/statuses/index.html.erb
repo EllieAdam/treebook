@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-  <h1>All Statuses</h1>
+<h2>All Statuses</h2>
 
 <%= link_to 'New Status', new_status_path, class: "btn btn-default" %><br><br>
 
@@ -12,7 +10,7 @@
   <% if current_user && (status.user == current_user || current_user.admin == true) %>
     <span class="admin">
     | <%= link_to 'Edit', edit_status_path(status) %>
-    | <%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %>
+    | <%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' } %>
     </span>
   <% end %>
 </div>

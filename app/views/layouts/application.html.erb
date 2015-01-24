@@ -29,37 +29,50 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
-          <% if current_user %>
+            <% if current_user %>
             <li class="dropdown">
               <a aria-expanded="true" href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Profile</a></li>
                 <li><%= link_to "Settings", edit_user_registration_path %>
-                <li class="divider"></li>
-                <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-              </ul>
-            </li>
-          <% else %>
-            <li><%= link_to "Register", new_user_registration_path %></li>
-            <li><%= link_to "Sign In", new_user_session_path %></li>
-          <% end %>
+                  <li class="divider"></li>
+                  <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                </ul>
+              </li>
+              <% else %>
+              <li><%= link_to "Register", new_user_registration_path %></li>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <% end %>
 
-          </ul>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <div class="container main-content">
-    <%= yield %>
+    <div class="container main-content">
+      <% if flash[:notice] %>
+      <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+
+      <% if flash[:alert] %>
+      <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <%= flash[:alert] %>
+      </div>
+      <% end %>
+      <%= yield %>
+    </div>
+
+    <footer>
+      <div class="container">
+      </div>
+    </footer>
+
   </div>
-
-  <footer>
-    <div class="container">
-    </div>
-  </footer>
-
-</div>
 
 </body>
 </html>
