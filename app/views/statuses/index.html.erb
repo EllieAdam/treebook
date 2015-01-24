@@ -1,16 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<div class="page-header">
   <h1>All Statuses</h1>
-</div>
 
 <%= link_to 'New Status', new_status_path, class: "btn btn-default" %><br><br>
 
 <% @statuses.each do |status| %>
 <div class="status">
-  <strong>Author name</strong>
+  <strong><%= status.user.name %></strong>
   <p><%= status.content %></p>
   <%= link_to time_ago_in_words(status.created_at) + " ago", status %>
-  <span class="admin"> | <%= link_to 'Edit', edit_status_path(status) %> | <%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <% if current_user && (status.user == current_user || current_user.admin == true) %>
+    <span class="admin">
+    | <%= link_to 'Edit', edit_status_path(status) %>
+    | <%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </span>
+  <% end %>
 </div>
 <% end %>

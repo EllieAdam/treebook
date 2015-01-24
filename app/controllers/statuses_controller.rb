@@ -13,7 +13,7 @@ class StatusesController < ApplicationController
   end
 
   def new
-    @status = Status.new
+    @status = current_user.statuses.new
     respond_with(@status)
   end
 
@@ -21,7 +21,7 @@ class StatusesController < ApplicationController
   end
 
   def create
-    @status = Status.new(status_params)
+    @status = current_user.statuses.new(status_params)
     @status.save
     respond_with(@status)
   end
