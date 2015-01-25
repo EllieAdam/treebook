@@ -1,9 +1,13 @@
 == Treebook
 
-Social media app based on Treehouse course, translated into Rails 4.2+ and RSpec 3+. To do:
+Social media app based on an outdated Treehouse course, translated into Rails 4.2+ and RSpec 3+. To do:
 
-* Implement Devise with user model
+* Tests
 
-* Add tests
+* Gravatars
+
+* Upvoting / Downvoting
+
+* Friendships
 
 * ...
