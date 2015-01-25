@@ -1,5 +1,7 @@
 class StatusesController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :owner?, only: [:edit, :update, :destroy]
 
   respond_to :html
 
@@ -53,5 +55,11 @@ class StatusesController < ApplicationController
 
   def status_params
     params.require(:status).permit(:content)
+  end
+
+  def owner?
+    unless @status.user == current_user || current_user.admin == true
+      redirect_to statuses_path, error: "You are not allowed to do that"
+    end
   end
 end
