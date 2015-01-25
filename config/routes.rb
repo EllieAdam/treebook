@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profiles/:id' => 'profiles#show', as: 'profiles'
+
   devise_for :users
 
   devise_scope :user do
