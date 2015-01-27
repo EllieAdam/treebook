@@ -1,17 +1,7 @@
 <h2>All Statuses</h2>
 
-<%= link_to 'New Status', new_status_path, class: "btn btn-default" %><br><br>
+<div><%= link_to 'New Status', new_status_path, class: "btn btn-default submitter", remote: true %></div>
 
-<% @statuses.each do |status| %>
-<div class="status">
-  <strong><%= link_to status.user.name, profiles_path(status.user) %></strong>
-  <p><%= status.content %></p>
-  <%= link_to time_ago_in_words(status.created_at) + " ago", status %>
-  <% if current_user && (status.user == current_user || current_user.admin == true) %>
-    <span class="admin">
-    | <%= link_to 'Edit', edit_status_path(status) %>
-    | <%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </span>
-  <% end %>
-</div>
-<% end %>
+<div id="status-form" style="display:none;"></div>
+
+<div id="statuses"><%= render @statuses %></div>

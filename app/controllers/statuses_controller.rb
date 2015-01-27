@@ -1,12 +1,12 @@
 class StatusesController < ApplicationController
+  before_action :all_statuses, only: [:index, :create, :update, :destroy]
   before_action :set_status, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :owner?, only: [:edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
-    @statuses = Status.order('created_at desc')
     respond_with(@statuses)
   end
 
@@ -24,30 +24,28 @@ class StatusesController < ApplicationController
 
   def create
     @status = current_user.statuses.new(status_params)
-    if @status.save
-      redirect_to statuses_path, success: 'Status was successfully created.'
-    else
+    unless @status.save
       render action: 'new'
     end
   end
 
   def update
-    if @status.update(status_params)
-      redirect_to statuses_path, success: 'Status was successfully updated.'
-    else
+    unless @status.update(status_params)
       render action: 'edit'
     end
   end
 
   def destroy
-    if @status.destroy
-      redirect_to statuses_path, success: 'Status was successfully deleted.'
-    else
+    unless @status.destroy
       redirect_to statuses_path, error: 'Status could not be deleted.'
     end
   end
 
   private
+
+  def all_statuses
+    @statuses = Status.order('created_at desc')
+  end
 
   def set_status
     @status = Status.find(params[:id])
