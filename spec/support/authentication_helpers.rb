@@ -7,7 +7,11 @@ module AuthenticationHelpers
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password
       click_button 'Log in'
+      within ".navbar" do
+        expect(page).to have_content(user.name)
+      end
     end
+
 
     def register_user
       visit "/"
@@ -23,6 +27,7 @@ module AuthenticationHelpers
 
       click_button "Register"
     end
+
   end
 
 end

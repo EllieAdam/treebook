@@ -6,7 +6,8 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rails'
-require 'capybara/email/rspec'
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -32,12 +33,25 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::TestHelpers, type: :controller
   config.include AuthenticationHelpers::Feature, type: :feature
+  config.include StatusHelpers::Feature, type: :feature
   config.include FactoryGirl::Syntax::Methods
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

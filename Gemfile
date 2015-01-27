@@ -30,9 +30,9 @@ group :test do
   gem 'capybara', '~> 2.4.4'
   gem 'database_cleaner', '~> 1.4.0'
   gem 'launchy', '~> 2.4.3'
-  gem 'selenium-webdriver', '~> 2.44.0'
   gem 'shoulda-matchers', '~> 2.7.0', require: false
   gem 'capybara-email', '~> 2.4.0'
+  gem 'poltergeist', '~> 1.5.1'
 end
 
 group :development, :test do
