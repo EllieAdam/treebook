@@ -1,8 +1,8 @@
 .status {
   padding: 15px;
   margin-bottom: 10px;
-  border-bottom: solid 1px #1C1E22;
-  border-right: solid 1px #1C1E22;
+  border-bottom: solid 2px #1C1E22;
+  border-right: solid 2px #1C1E22;
   transition: background-color 0.6s;
   border-radius: 10px;
   background-color: darken(#272B30, 3%);
@@ -42,4 +42,9 @@ h2 {
 
 .dimmed {
   color: #7A8288;
+}
+
+.gravie {
+  border-radius: 50%;
+  border: 2px solid #1C1E22;
 }

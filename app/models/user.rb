@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  include Gravtastic
+  gravtastic :secure => true,
+              :size => 70
+
   validates :name, presence: true, uniqueness: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
