@@ -1,2 +1,15 @@
-<h2><%= @user.name %></h2>
-<p>Find me in app/views/profiles/show.html.erb</p>
+<h2><%= @user.name %>'s Profile</h2>
+<h3>Statuses</h3>
+
+<% @statuses.each do |status| %>
+<div class="status">
+  <p><%= status.content %></p>
+  <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
+  <% if current_user && (status.user == current_user || current_user.admin == true) %>
+  <span class="admin">
+    | <%= link_to 'Edit', edit_status_path(status), remote: true %>
+    | <%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+  </span>
+  <% end %>
+</div>
+<% end %>
