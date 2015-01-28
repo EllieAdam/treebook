@@ -1,13 +1,13 @@
 == Treebook
 
-Social media app based on an outdated Treehouse course, translated into Rails 4.2+ and RSpec 3+. To do:
+Social media app based on an outdated Treehouse course, translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
 
-* Tests
-
-* Gravatars
+* More feature tests
 
 * Upvoting / Downvoting
 
 * Friendships
 
 * ...
+
+Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com/
