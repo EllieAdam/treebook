@@ -16,6 +16,7 @@ feature "Creating statuses as user" do
     fill_in "status_content", with: "My day was great"
     click_button "Submit"
     expect(page).to have_content("My day was great")
+    expect(page).to_not have_field('status_content', with: "My day was great")
     expect(Status.count).to eq(1)
   end
 
@@ -29,6 +30,7 @@ feature "Creating statuses as user" do
     click_button "Submit"
 
     expect(page).to have_content(/can't be blank/i)
+    expect(page).to have_field('status_content', with: "")
     expect(Status.count).to eq(0)
   end
 
@@ -42,6 +44,7 @@ feature "Creating statuses as user" do
     click_button "Submit"
 
     expect(page).to have_content(/is too short/i)
+    expect(page).to have_field('status_content', with: "A")
     expect(Status.count).to eq(0)
   end
 end

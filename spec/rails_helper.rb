@@ -7,7 +7,7 @@ require 'shoulda/matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rails'
 require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :webkit
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -43,6 +43,7 @@ RSpec.configure do |config|
 
   config.before(:each) do |example|
     if example.metadata[:js]
+      page.driver.block_unknown_urls
       DatabaseCleaner.strategy = :truncation
     else
       DatabaseCleaner.strategy = :transaction

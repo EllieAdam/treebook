@@ -32,7 +32,7 @@ group :test do
   gem 'launchy', '~> 2.4.3'
   gem 'shoulda-matchers', '~> 2.7.0', require: false
   gem 'capybara-email', '~> 2.4.0'
-  gem 'poltergeist', '~> 1.5.1'
+  gem 'capybara-webkit', '~> 1.4.1'
 end
 
 group :development, :test do
