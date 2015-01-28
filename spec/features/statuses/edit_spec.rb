@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Creating statuses as user" do
+feature "Editing statuses as user" do
 
   background do
     @user = create(:user)
