@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :statuses, dependent: :destroy
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
