@@ -14,8 +14,7 @@ class FriendshipsController < ApplicationController
   def create
     if params[:friendship] && params[:friendship].has_key?(:friend_id)
       @friend = User.find_by(slug: params[:friendship][:friend_id])
-      @friendship = current_user.friendships.new(friend: @friend)
-      @friendship.save
+      @friendship = current_user.friendships.create(friend: @friend)
       flash[:success] = "You are now friends with #{@friend.name}"
       redirect_to profiles_path(@friend)
     else

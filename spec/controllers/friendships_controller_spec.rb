@@ -99,4 +99,32 @@ RSpec.describe FriendshipsController, :type => :controller do
       end
     end
   end
+
+  describe "a new instance" do
+
+    before do
+      @friendship = Friendship.create user: user, friend: user2
+    end
+
+    it "is pending when created" do
+      expect(@friendship.state).to eq("pending")
+    end
+
+    context "#send_request_email" do
+      it "delivers the request email" do
+        expect(ActionMailer::Base.deliveries.size).to eq(0)
+        expect{ @friendship.send_request_email }.to change(ActionMailer::Base.deliveries, :size).by(1)
+      end
+    end
+
+    context "#accept!" do
+      it "sets the friendshipstate to accepted" do
+        expect{ @friendship.accept! }.to change(@friendship, :state).from("pending").to("accepted")
+      end
+
+      it "delivers the aceptance email" do
+        expect{ @friendship.accept! }.to change(ActionMailer::Base.deliveries, :size).by(1)
+      end
+    end
+  end
 end
