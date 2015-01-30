@@ -16,4 +16,5 @@ Some major differences compared to the original project:
 * friendly_id gem for creating unique slugs for users
 * gravtastic gem for taking care of Gravatars
 * RSpec/Factory Girl/Capybara/Capybara Webkit for testing
+* lambdas instead of conditions in model relationships
 * ...

@@ -25,7 +25,17 @@ RSpec.describe Friendship, :type => :model do
 
     it "friendship creation works with ids" do
       Friendship.create(user_id: boss.id, friend_id: worker.id)
-      expect(boss.friends).to include(worker)
+      expect(boss.pending_friends).to include(worker)
+    end
+
+    describe ".request" do
+      it "creates two friendships between users" do
+        expect{Friendship.request(boss, worker)}.to change(Friendship, :count).by(2)
+      end
+
+      it "sends a request email" do
+        expect{Friendship.request(boss, worker)}.to change(ActionMailer::Base.deliveries, :size).by(1)
+      end
     end
   end
 end

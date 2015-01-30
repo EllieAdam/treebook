@@ -16,6 +16,12 @@ Rails.application.routes.draw do
   end
 
   resources :statuses
-  resources :friendships
+
+  resources :friendships do
+    member do
+      put :accept
+    end
+  end
+
   root 'statuses#index'
 end
