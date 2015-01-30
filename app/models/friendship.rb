@@ -1,12 +1,15 @@
 class Friendship < ActiveRecord::Base
+  include AASM
+
   belongs_to :user
   belongs_to :friend, class_name: 'User', foreign_key: 'friend_id'
 
-  state_machine initial: :pending do
-    after_transition on: :accept, do: :send_acceptance_email
+  aasm :column => 'state', :whiny_transitions => false do
+    state :pending, :initial => true
+    state :accepted
 
-    event :accept do
-      transition any => :accepted
+    event :accept, :after => :send_acceptance_email do
+      transitions :from => :pending, :to => :accepted
     end
   end
 

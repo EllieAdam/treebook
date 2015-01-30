@@ -1,13 +1,19 @@
 == Treebook
 
-Social media app based on an outdated Treehouse course, translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
+Social media app based on an outdated Treehouse course, completely rewritten and translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
 
 * More feature tests
-
 * Upvoting / Downvoting
-
 * Friendships
-
 * ...
 
-Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com/
+Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com
+
+Some major differences compared to the original project:
+
+* Bootswatch Slate theme instead of vanilla Bootstrap
+* aasm gem instead of state_machine gem which is no longer maintained
+* friendly_id gem for creating unique slugs for users
+* gravtastic gem for taking care of Gravatars
+* RSpec/Factory Girl/Capybara/Capybara Webkit for testing
+* ...
