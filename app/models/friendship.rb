@@ -9,8 +9,9 @@ class Friendship < ActiveRecord::Base
     state :accepted
     state :requested
 
-    event :accept, :after => :send_acceptance_email do
+    event :accept, :after => [:send_acceptance_email, :accept_mutual_friendship!] do
       transitions :from => :pending, :to => :accepted
+      transitions :from => :requested, :to => :accepted
     end
   end
 
@@ -30,5 +31,14 @@ class Friendship < ActiveRecord::Base
 
   def send_acceptance_email
     UserNotifier.friend_request_accepted(id).deliver_now
+  end
+
+  def mutual_friendship
+    self.class.where({user_id: friend_id, friend_id: user_id}).first
+  end
+
+  def accept_mutual_friendship!
+    #this accepts the mirrored friendship to let the original user know the friendhip was accepted
+    mutual_friendship.update_attribute(:state, 'accepted')
   end
 end

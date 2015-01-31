@@ -15,6 +15,11 @@ class FriendshipsController < ApplicationController
     redirect_to friendships_path
   end
 
+  def edit
+    @friendship = current_user.friendships.find(params[:id])
+    @friend = @friendship.friend
+  end
+
   def new
     if params[:friend_id]
       render file: 'public/404', status: :not_found unless @friend = User.find_by(slug: params[:friend_id])
@@ -28,9 +33,12 @@ class FriendshipsController < ApplicationController
   def create
     if params[:friendship] && params[:friendship].has_key?(:friend_id)
       @friend = User.find_by(slug: params[:friendship][:friend_id])
-      @friendship = current_user.friendships.new(friend: @friend)
-      @friendship.save
-      flash[:success] = "You are now friends with #{@friend.name}"
+      @friendship = Friendship.request(current_user, @friend)
+      if @friendship.new_record?
+        flash[:error] = "Something went wrong."
+      else
+        flash[:success] = "Friend request sent."
+      end
       redirect_to profiles_path(@friend)
     else
       flash[:error] = "Friend required."

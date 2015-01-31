@@ -120,24 +120,6 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
-  describe "a new instance" do
-
-    before do
-      @friendship = Friendship.create user: user, friend: user2
-    end
-
-    it "is pending when created" do
-      expect(@friendship.state).to eq("pending")
-    end
-
-    context "#send_request_email" do
-      it "delivers the request email" do
-        expect(ActionMailer::Base.deliveries.size).to eq(0)
-        expect{ @friendship.send_request_email }.to change(ActionMailer::Base.deliveries, :size).by(1)
-      end
-    end
-  end
-
   describe "#accept" do
 
     before do
@@ -175,4 +157,34 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
+  describe "GET edit" do
+    context "when logged in" do
+      render_views
+
+      before do
+        @friendship = create(:pending_friendship, user: user, friend: user2)
+        sign_in(user)
+        get :edit, id: @friendship
+      end
+
+      it "response is a success" do
+        expect(response.status).to eq(200)
+      end
+
+      it "assigns a new @friendship variable" do
+        expect(assigns(:friendship)).to eq(@friendship)
+      end
+
+      it "assigns a new @friend variable" do
+        expect(assigns(:friend)).to eq(user2)
+      end
+    end
+
+    context "when not logged in" do
+      it "redirects to the login page" do
+        get :edit, id: 1
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
 end

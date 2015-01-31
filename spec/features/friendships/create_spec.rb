@@ -15,8 +15,8 @@ feature "Creating friendship as user" do
     click_link "Add Friend"
     expect(page).to have_content("Are you sure you want to request this friend?")
     click_button "Yes, add friend"
-    expect(page).to have_content("You are now friends with #{@user2.name}")
-    expect(Friendship.count).to eq(1)
+    expect(page).to have_content("Friend request sent.")
+    expect(Friendship.count).to eq(2)
   end
 
 end
