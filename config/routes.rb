@@ -15,7 +15,12 @@ Rails.application.routes.draw do
     delete "/logout" => "devise/sessions#destroy", as: :destroy_user_session
   end
 
-  resources :statuses
+  resources :statuses do
+    member do
+      put "upvote", to: "statuses#upvote"
+      put "downvote", to: "statuses#downvote"
+    end
+  end
 
   resources :friendships do
     member do

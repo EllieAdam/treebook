@@ -1,7 +1,7 @@
 class StatusesController < ApplicationController
-  before_action :all_statuses, only: [:index, :create, :update, :destroy]
-  before_action :set_status, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :all_statuses, only: [:index, :create, :update, :destroy]
+  before_action :set_status, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :owner?, only: [:edit, :update, :destroy]
 
   respond_to :html, :js
@@ -39,6 +39,16 @@ class StatusesController < ApplicationController
     unless @status.destroy
       redirect_to statuses_path, error: 'Status could not be deleted.'
     end
+  end
+
+  def upvote
+    @status.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @status.downvote_by current_user
+    redirect_to :back
   end
 
   private

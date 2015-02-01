@@ -9,10 +9,15 @@
       <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
       <% if current_user && (status.user == current_user || current_user.admin == true) %>
       <span class="admin">
-        | <%= link_to 'Edit', edit_status_path(status), remote: true %>
-        | <%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+        <%= link_to 'Edit', edit_status_path(status), remote: true %>
+        <%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
       </span>
       <% end %>
+      <span class="voting pull-right">
+        <span class="text-success"><%= status.get_upvotes.size %></span>
+        <%= link_to "Upvote", upvote_status_path(status), method: :put%> | <%= link_to "Downvote", downvote_status_path(status), method: :put%>
+        <span class="text-danger"><%= status.get_downvotes.size %></span>
+      </span>
     </div>
   </div>
 </div>

@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   include Gravtastic
-  gravtastic :secure => true,
+  gravtastic  :secure => true,
               :size => 70
+
+  acts_as_voter
 
   validates :name, presence: true, uniqueness: true
   # Include default devise modules. Others available are:
