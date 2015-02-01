@@ -19,4 +19,15 @@ feature "Creating friendship as user" do
     expect(Friendship.count).to eq(2)
   end
 
+  scenario "creates a mutual friendship with requested state" do
+    visit profiles_path(@user2)
+    click_link "Add Friend"
+    click_button "Yes, add friend"
+    expect(page).to have_content("Friendship is pending")
+    log_out(@user)
+    log_in(@user2)
+    visit friendships_path
+    expect(page).to have_content("Friendship requested")
+  end
+
 end

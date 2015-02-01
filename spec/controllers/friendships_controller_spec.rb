@@ -6,35 +6,41 @@ RSpec.describe FriendshipsController, :type => :controller do
   let(:user3) { create(:user) }
 
   describe "GET index" do
-    context "when logged in" do
+    describe "when not logged in" do
+      it "redirects to the login page" do
+        get :index
+        expect(response).to redirect_to(login_path)
+      end
+    end
 
+    describe "when logged in" do
       before do
         sign_in(user)
-        @friendship1 = create(:pending_friendship, user: user, friend: user2)
-        @friendship2 = create(:accepted_friendship, user: user, friend: user3)
-        get :index
       end
 
       it "gets the index page without errors" do
+        get :index
         expect(response.status).to eq(200)
       end
 
       it "assigns a new @friendships variable" do
-        expect(assigns(:friendships)).to eq([@friendship1, @friendship2])
-      end
-
-    end
-
-    context "when not logged in" do
-      it "redirects to the login page" do
-        get :new
-        expect(response).to redirect_to(login_path)
+        friendship1 = create(:pending_friendship, user: user, friend: user2)
+        friendship2 = create(:accepted_friendship, user: user, friend: user3)
+        get :index
+        expect(assigns(:friendships)).to eq([friendship1, friendship2])
       end
     end
   end
 
   describe "GET new" do
-    context "when logged in" do
+    describe "when not logged in" do
+      it "redirects to the login page" do
+        get :new
+        expect(response).to redirect_to(login_path)
+      end
+    end
+
+    describe "when logged in" do
       render_views
 
       before do
@@ -51,7 +57,7 @@ RSpec.describe FriendshipsController, :type => :controller do
         expect(response.status).to eq(200)
       end
 
-      it "displays flash error when friend id is missing" do
+      it "sets up flash error when friend id is missing" do
         get :new
         expect(flash[:error]).to eq("Friend required.")
       end
@@ -81,24 +87,22 @@ RSpec.describe FriendshipsController, :type => :controller do
         expect(response.status).to eq(404)
       end
     end
-
-    context "when not logged in" do
-      it "redirects to the login page" do
-        get :new
-        expect(response).to redirect_to(login_path)
-      end
-    end
   end
 
   describe "POST create" do
-    context "when logged in" do
+    describe "when not logged in" do
+      it "redirects to the login page" do
+        post :create
+        expect(response).to redirect_to(login_path)
+      end
+    end
 
+    describe "when logged in" do
       before do
         sign_in(user)
       end
 
-      context "when friend id is missing" do
-
+      describe "when friend id is missing" do
         it "displays flash error" do
           post :create
           expect(flash[:error]).to_not be_empty
@@ -108,79 +112,71 @@ RSpec.describe FriendshipsController, :type => :controller do
           post :create
           expect(response).to redirect_to(statuses_path)
         end
-
-      end
-    end
-
-    context "when not logged in" do
-      it "redirects to the login page" do
-        post :create
-        expect(response).to redirect_to(login_path)
       end
     end
   end
 
   describe "#accept" do
-
-    before do
-      @friendship1 = create(:pending_friendship, user: user, friend: user2)
-      @friendship2 = create(:accepted_friendship, user: user, friend: user3)
-    end
-
-    context "when logged in" do
-
+    describe "when logged in" do
       before do
-        sign_in(user)
-        put :accept, id: @friendship1.id
-        @friendship1.reload
+        Friendship.request(user, user2)
+        sign_in(user2)
       end
 
-      it "sets the friendship state to accepted" do
-        expect(@friendship1.state).to eq("accepted")
+      it "sets both friendships' state to accepted" do
+        friendship = Friendship.where(user_id: user.id).first
+        friendship2 = Friendship.where(friend_id: user.id).first
+        expect(friendship.state).to eq("pending")
+        expect(friendship2.state).to eq("requested")
+        put :accept, id: friendship2.id
+        friendship.reload
+        friendship2.reload
+        expect(friendship.state).to eq("accepted")
+        expect(friendship2.state).to eq("accepted")
       end
 
       it "assigns a new @friendship variable" do
-        expect(assigns(:friendship)).to eq(@friendship1)
+        friendship2 = Friendship.where(user_id: user2.id).first
+        put :accept, id: friendship2.id
+        expect(assigns(:friendship)).to eq(friendship2)
       end
 
       it "sets a success flash message" do
-        expect(flash[:success]).to eq("You are now friends with #{@friendship1.friend.name}")
-      end
-
-    end
-
-    context "when not logged in" do
-      it "redirects to the login page" do
-        put :accept, id: @friendship1.id
-        expect(response).to redirect_to(login_path)
+        friendship2 = Friendship.where(user_id: user2.id).first
+        put :accept, id: friendship2.id
+        expect(flash[:success]).to eq("You are now friends with #{friendship2.friend.name}")
       end
     end
   end
 
   describe "GET edit" do
-    context "when logged in" do
-      render_views
+    describe "when logged in" do
 
       before do
-        @friendship = create(:pending_friendship, user: user, friend: user2)
+        Friendship.request(user, user2)
         sign_in(user)
-        get :edit, id: @friendship
       end
 
       it "response is a success" do
+        friendship2 = Friendship.first
+        get :edit, id: friendship2
         expect(response.status).to eq(200)
       end
 
-      it "assigns a new @friendship variable" do
-        expect(assigns(:friendship)).to eq(@friendship)
+      it "assigns a new friendship variable" do
+        friendship = Friendship.where(user_id: user.id).first
+        get :edit, id: friendship.id
+        expect(assigns(:friendship)).to eq(friendship)
       end
 
       it "assigns a new @friend variable" do
+        friendship = Friendship.where(user_id: user.id).first
+        get :edit, id: friendship.id
         expect(assigns(:friend)).to eq(user2)
       end
     end
 
-    context "when not logged in" do
+    describe "when not logged in" do
       it "redirects to the login page" do
         get :edit, id: 1
         expect(response).to redirect_to(login_path)

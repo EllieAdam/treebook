@@ -39,7 +39,7 @@ class FriendshipsController < ApplicationController
       else
         flash[:success] = "Friend request sent."
       end
-      redirect_to profiles_path(@friend)
+      redirect_to friendships_path
     else
       flash[:error] = "Friend required."
       redirect_to statuses_path

@@ -6,11 +6,10 @@ class Friendship < ActiveRecord::Base
 
   aasm :column => 'state', :whiny_transitions => false do
     state :pending, :initial => true
-    state :accepted
     state :requested
+    state :accepted
 
-    event :accept, :after => [:send_acceptance_email, :accept_mutual_friendship!] do
-      transitions :from => :pending, :to => :accepted
+    event :accept, :after => :accept_mutual_friendship! do
       transitions :from => :requested, :to => :accepted
     end
   end

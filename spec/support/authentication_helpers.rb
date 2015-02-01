@@ -12,6 +12,14 @@ module AuthenticationHelpers
       end
     end
 
+    def log_out(user)
+      visit statuses_path
+      click_link "#{user.name}"
+      click_link 'Log Out'
+      within ".navbar" do
+        expect(page).to_not have_content(user.name)
+      end
+    end
 
     def register_user
       visit "/"
