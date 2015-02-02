@@ -14,8 +14,9 @@ feature "Editing statuses as user" do
     visit statuses_path
 
     within "#statuses" do
-      page.find("#{dom_id_for(@status)}").hover
+      find('.status-options').click
       click_link 'Edit'
+      find('.status-options').click
     end
 
     expect(page).to have_field('status_content', with: "I want to go home.")
@@ -29,8 +30,9 @@ feature "Editing statuses as user" do
 
   scenario "cancels update properly", :js => true do
     within "#statuses" do
-      page.find("#{dom_id_for(@status)}").hover
+      find('.status-options').click
       click_link 'Edit'
+      find('.status-options').click
     end
 
     expect(page).to have_field('status_content', with: "I want to go home.")
@@ -45,8 +47,9 @@ feature "Editing statuses as user" do
 
   scenario "displays error when status content is missing on update", :js => true do
     within "#statuses" do
-      page.find("#{dom_id_for(@status)}").hover
+      find('.status-options').click
       click_link 'Edit'
+      find('.status-options').click
     end
 
     expect(page).to have_field('status_content', with: "I want to go home.")
@@ -59,8 +62,9 @@ feature "Editing statuses as user" do
 
   scenario "displays error when status content is shorter than 2 characters", :js => true do
     within "#statuses" do
-      page.find("#{dom_id_for(@status)}").hover
+      find('.status-options').click
       click_link 'Edit'
+      find('.status-options').click
     end
 
     expect(page).to have_field('status_content', with: "I want to go home.")
