@@ -15,7 +15,7 @@
       <% end %>
       <span id="<%= status.id %>" class="voting pull-right">
         <span class="text-success"><%= status.cached_votes_up %></span>
-        <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %><i class="fa fa-thumbs-o-up"></i>Upvote<% end %>
+        <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %><i class="fa fa-thumbs-o-up"></i><% end %>
         |
         <%= link_to downvote_status_path(status), method: :put, class: "downie", remote: true do %>
           <i class="fa fa-thumbs-o-down"></i><% end %>
