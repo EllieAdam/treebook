@@ -15,10 +15,23 @@
       <% end %>
       <span id="<%= status.id %>" class="voting pull-right">
         <span class="text-success"><%= status.cached_votes_up %></span>
-        <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %><i class="fa fa-thumbs-o-up"></i><% end %>
+
+        <% if current_user.voted_up_on?(status) %>
+          <%= link_to upvote_status_path(status), method: :put, class: "uppie highlighted", remote: true do %>
+          <i class="fa fa-thumbs-o-up"></i><% end %>
+        <% else %>
+          <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %>
+          <i class="fa fa-thumbs-o-up"></i><% end %>
+        <% end %>
         |
-        <%= link_to downvote_status_path(status), method: :put, class: "downie", remote: true do %>
+        <% if current_user.voted_down_on?(status) %>
+          <%= link_to downvote_status_path(status), method: :put, class: "downie highlighted", remote: true do %>
           <i class="fa fa-thumbs-o-down"></i><% end %>
+        <% else %>
+          <%= link_to downvote_status_path(status), method: :put, class: "downie", remote: true do %>
+          <i class="fa fa-thumbs-o-down"></i><% end %>
+        <% end %>
+
         <span class="text-danger"><%= status.cached_votes_down %></span>
       </span>
     </div>

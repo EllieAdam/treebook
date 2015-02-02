@@ -65,6 +65,11 @@ h2 {
   }
 }
 
-.uppie:hover, .downie:hover {
-  color: orange;
+.uppie:hover, .uppie.highlighted, .highlighted.uppie {
+  color: #62C462;
+}
+
+
+.downie:hover, .downie.highlighted, .highlighted.downie {
+  color: #EE5F5B;
 }
