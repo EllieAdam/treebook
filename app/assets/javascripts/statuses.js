@@ -1,6 +1,6 @@
 var ready;
-ready = function() {
 
+ready = function() {
   $(".uppie, .downie").click( function() {
     if ($(this).hasClass('highlighted')) {
       $(this).removeClass('highlighted');
