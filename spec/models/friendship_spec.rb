@@ -34,9 +34,9 @@ RSpec.describe Friendship, :type => :model do
       expect{Friendship.request(boss, worker)}.to change(Friendship, :count).by(2)
     end
 
-    it "sends a request email" do
-      expect{Friendship.request(boss, worker)}.to change(ActionMailer::Base.deliveries, :size).by(1)
-    end
+#    it "sends a request email" do
+#      expect{Friendship.request(boss, worker)}.to change(ActionMailer::Base.deliveries, :size).by(1)
+#    end
   end
 
   describe "#accept_mutual_friendship!" do

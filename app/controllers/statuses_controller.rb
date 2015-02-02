@@ -42,11 +42,19 @@ class StatusesController < ApplicationController
   end
 
   def upvote
-    @status.upvote_by current_user
+    if current_user.voted_up_on? @status
+      @status.unliked_by current_user
+    else
+      @status.upvote_by current_user
+    end
   end
 
   def downvote
-    @status.downvote_by current_user
+    if current_user.voted_down_on? @status
+      @status.undisliked_by current_user
+    else
+      @status.downvote_by current_user
+    end
   end
 
   private

@@ -8,15 +8,17 @@
       <p><%= status.content %></p>
       <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
       <% if current_user && (status.user == current_user || current_user.admin == true) %>
-      <span class="admin">
-        <%= link_to 'Edit', edit_status_path(status), remote: true %>
-        <%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-      </span>
+        <span class="admin">
+          <%= link_to 'Edit', edit_status_path(status), remote: true %>
+          <%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+        </span>
       <% end %>
       <span id="<%= status.id %>" class="voting pull-right">
         <span class="text-success"><%= status.cached_votes_up %></span>
-        <%= link_to upvote_status_path(status), method: :put, remote: true do %><i class="fa fa-thumbs-o-up"></i> Upvote<% end %>
-        | <%= link_to downvote_status_path(status), method: :put, remote: true do %>Downvote <i class="fa fa-thumbs-o-down"></i><% end %>
+        <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %><i class="fa fa-thumbs-o-up"></i>Upvote<% end %>
+        |
+        <%= link_to downvote_status_path(status), method: :put, class: "downie", remote: true do %>
+          <i class="fa fa-thumbs-o-down"></i><% end %>
         <span class="text-danger"><%= status.cached_votes_down %></span>
       </span>
     </div>
