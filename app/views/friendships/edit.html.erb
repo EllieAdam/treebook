@@ -1,11 +1,21 @@
 <h2>Viewing friendship</h2>
 
-<p>Are you sure you want to be friends?</p>
+<% if @friendship.requested? %>
+<p>Are you sure you want to be friends with <%= @friend.name %>?</p>
+<% end %>
+
+<% if @friendship.accepted? %>
+<p>You are friends with <%= @friend.name %>.</p>
+<% end %>
 
 <div>
   <% if @friendship.requested? %>
   <%= form_for @friendship, url: accept_friendship_path(@friendship), method: :put do |form| %>
   <%= submit_tag "Accept friendship", class: "btn btn-success" %>
   <% end %>
+  <% end %>
+
+  <%= form_for @friendship, url: friendship_path(@friendship), method: :delete do |form| %>
+  <%= submit_tag "Cancel friendship", class: "btn btn-danger" %>
   <% end %>
 </div>

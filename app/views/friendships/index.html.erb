@@ -1,4 +1,8 @@
-<h2>Friends</h2>
+<h2>Friendships</h2>
+
+<% if @friendships.empty? %>
+  <p>There are no friendships to view! Don't be shy, add some friends :)</p>
+<% end %>
 
 <% @friendships.each do |friendship| %>
 <% friend = friendship.friend %>

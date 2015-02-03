@@ -4,6 +4,8 @@ class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend, class_name: 'User', foreign_key: 'friend_id'
 
+  after_destroy :delete_mutual_friendship!
+
   aasm :column => 'state', :whiny_transitions => false do
     state :pending, :initial => true
     state :requested
@@ -39,5 +41,9 @@ class Friendship < ActiveRecord::Base
   def accept_mutual_friendship!
     #this accepts the mirrored friendship to let the original user know the friendhip was accepted
     mutual_friendship.update_attribute(:state, 'accepted')
+  end
+
+  def delete_mutual_friendship!
+    mutual_friendship.delete
   end
 end

@@ -46,4 +46,13 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def destroy
+    @friendship = current_user.friendships.find(params[:id])
+    if @friendship.destroy
+      redirect_to friendships_path, success: "You are no longer friends."
+    else
+      redirect_to friendships_path, error: "Something went wrong. Looks like this friendship will last forever!"
+    end
+  end
+
 end
