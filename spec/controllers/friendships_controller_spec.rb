@@ -150,6 +150,13 @@ RSpec.describe FriendshipsController, :type => :controller do
   end
 
   describe "GET edit" do
+    describe "when not logged in" do
+      it "redirects to the login page" do
+        get :edit, id: 1
+        expect(response).to redirect_to(login_path)
+      end
+    end
+
     describe "when logged in" do
 
       before do
@@ -175,11 +182,33 @@ RSpec.describe FriendshipsController, :type => :controller do
         expect(assigns(:friend)).to eq(user2)
       end
     end
+  end
 
+  describe "DELETE destroy" do
     describe "when not logged in" do
       it "redirects to the login page" do
-        get :edit, id: 1
+        delete :destroy, id: 1
         expect(response).to redirect_to(login_path)
+      end
+    end
+
+    describe "when logged in" do
+      before do
+        Friendship.request(user, user2)
+        expect(Friendship.count).to eq(2)
+        sign_in(user)
+      end
+
+      it "assigns a new friendship variable" do
+        friendship = Friendship.where(user_id: user.id).first
+        delete :destroy, id: friendship.id
+        expect(assigns(:friendship)).to eq(friendship)
+      end
+
+      it "deletes a mutual friendship" do
+        friendship = Friendship.where(user_id: user.id).first
+        delete :destroy, id: friendship.id
+        expect(Friendship.count).to eq(0)
       end
     end
   end

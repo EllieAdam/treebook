@@ -49,4 +49,15 @@ RSpec.describe Friendship, :type => :model do
       expect(friendship2.state).to eq("accepted")
     end
   end
+
+  describe "#delete_mutual_friendship!" do
+    it "deletes the mutual frienship when the first one is destroyed" do
+      Friendship.request(boss, worker)
+      expect(Friendship.count).to eq(2)
+      friendship1 = boss.friendships.where(friend_id: worker.id).first
+      friendship2 = worker.friendships.where(friend_id: boss.id).first
+      friendship1.destroy
+      expect(Friendship.count).to eq(0)
+    end
+  end
 end
