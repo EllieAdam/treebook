@@ -18,7 +18,7 @@
   <%= f.text_area :content, class: "form-control former", rows: "3" %>
 </div>
 <div class="submitter">
-  <%= f.submit "Submit", class: 'btn btn-primary' %>
+  <%= f.button "Submit", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } %>
   <a href="#" class='btn btn-warning' id="canceller">Cancel</a>
 </div>
 <% end %>

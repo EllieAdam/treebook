@@ -45,7 +45,7 @@
           </div>
 
           <div class="actions">
-            <%= f.submit "Update", class: 'btn btn-default btn-lg btn-block' %>
+            <%= f.button "Update", class: 'btn btn-default btn-lg btn-block', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating..." } %>
           </div>
         </fieldset>
         <% end %>
