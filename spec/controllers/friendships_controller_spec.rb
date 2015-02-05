@@ -116,7 +116,7 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
-  describe "#accept" do
+  describe "PUT accept" do
     describe "when logged in" do
       before do
         Friendship.request(user, user2)

@@ -13,8 +13,12 @@ class User < ActiveRecord::Base
   has_many :statuses, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :friends, -> { where(friendships: { state: 'accepted' }).order('name DESC') }, :through => :friendships
+
   has_many :pending_friendships, -> { where(state: 'pending') }, class_name: 'Friendship', foreign_key: 'user_id'
   has_many :pending_friends, through: :pending_friendships, source: :friend
+
+  has_many :requested_friendships, -> { where(state: 'requested') }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :requested_friends, through: :requested_friendships, source: :friend
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

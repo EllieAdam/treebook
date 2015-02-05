@@ -10,9 +10,22 @@ class Friendship < ActiveRecord::Base
     state :pending, :initial => true
     state :requested
     state :accepted
+    state :blocked
 
     event :accept, :after => :accept_mutual_friendship! do
       transitions :from => :requested, :to => :accepted
+    end
+
+    event :block, :after => :block_mutual_friendship! do
+      transitions :from => [:requested, :pending, :accepted], :to => :blocked
+    end
+  end
+
+  validate :not_blocked
+
+  def not_blocked
+    if Friendship.exists?(user_id: user_id, friend_id: friend_id, state: "blocked") || Friendship.exists?(user_id: friend_id, friend_id: user_id, state: "blocked")
+      errors.add(:base, "The friendship cannot be created.")
     end
   end
 
@@ -45,5 +58,9 @@ class Friendship < ActiveRecord::Base
 
   def delete_mutual_friendship!
     mutual_friendship.delete
+  end
+
+  def block_mutual_friendship!
+    mutual_friendship.update_attribute(:state, 'blocked') if mutual_friendship
   end
 end
