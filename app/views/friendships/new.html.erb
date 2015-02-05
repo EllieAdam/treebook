@@ -5,7 +5,7 @@
 <p>Are you sure you want to request this friend?</p>
 
 <%= form_for @friendship, method: :post do |form| %>
-<%= form.hidden_field :friend_id, value: @friend.slug %>
+<%= form.hidden_field :friend_id, value: @friend %>
 <%= submit_tag "Yes, add friend", class: "btn btn-success" %>
 <%= link_to "Cancel", profiles_path(@friend), class: "btn btn-danger" %>
 <% end %>

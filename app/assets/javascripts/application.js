@@ -16,3 +16,5 @@
 //= require bootstrap
 //= require bootswatch
 //= require statuses
+//= require js-routes
+//= require friendships

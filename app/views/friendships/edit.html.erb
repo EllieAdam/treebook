@@ -1,6 +1,19 @@
 <h2>Viewing friendship</h2>
 
-<p><%= @friendship.sub_message %></p>
+
+  <div class="avatar span2">
+    <%= image_tag @friendship.user.gravatar_url, class: 'gravie' %><br />
+    <%= @friendship.user.name %>
+  </div>
+  <div class="avatar span2">
+    <%= image_tag @friendship.friend.gravatar_url, class: 'gravie' %><br />
+    <%= @friendship.friend.name %>
+  </div>
+
+
+
+  <p><%= @friendship.sub_message %></p>
+
 
 <div>
   <% if @friendship.requested? %>
