@@ -60,7 +60,7 @@ class StatusesController < ApplicationController
   private
 
   def all_statuses
-    @statuses = Status.order('created_at desc')
+    @statuses = Status.page(params[:page]).order('created_at DESC')
   end
 
   def set_status

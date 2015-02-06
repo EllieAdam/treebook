@@ -5,4 +5,6 @@ class Status < ActiveRecord::Base
   belongs_to :user
 
   acts_as_votable
+
+  self.per_page = 10
 end
