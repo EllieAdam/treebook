@@ -2,10 +2,18 @@
 
 Social media app based on an outdated Treehouse course, completely rewritten and translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
 
-* Friendships
+* Fix feature tests
+* Better UI
+* Nicer pagination buttons
+* Scope statuses instead of hiding blocked user statuses in views
+* Make Friendship listing more dynamic
+* Implement a working mailer
 * ...
 
 Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com
+
+NOTE: If you want to run this locally, you need to rename the config/database.yml.sample file to config/database.yml
+and install Qt before even doing bundle install (capybara webkit needs it): https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
 
 Mailer temporarily disabled to prevent problems in production.
 
@@ -18,4 +26,5 @@ Some major differences compared to the original project:
 * RSpec/Factory Girl/Capybara/Capybara Webkit for testing
 * lambdas instead of conditions in model relationships
 * upvoting/downvoting feature (ajaxified)
+* Status pagination with will_paginate gem
 * ...

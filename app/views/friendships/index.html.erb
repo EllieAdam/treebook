@@ -23,16 +23,19 @@
       <td>
         <strong><%= link_to friend.name, profiles_path(friend) %></strong>
         <% if friendship.pending? %>
-        <em>Friendship is pending</em> <%= link_to 'Delete request', edit_friendship_path(friendship) %>
+          <em>Pending</em>
+          <%= link_to 'Edit request', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
         <% end %>
         <% if friendship.requested? %>
-        <em>Friendship requested</em> <%= link_to 'Accept request', edit_friendship_path(friendship) %>
+          <em>Requested</em>
+          <%= link_to 'Edit request', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %> 
         <% end %>
         <% if friendship.accepted? %>
-        <em>Friendship active</em> <%= link_to 'Edit request', edit_friendship_path(friendship) %>
+          <em>Active</em>
+          <%= link_to 'Edit request', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
         <% end %>
       </td>
     </tr>
-  </table>
   <% end %>
+</table>
 </div>
