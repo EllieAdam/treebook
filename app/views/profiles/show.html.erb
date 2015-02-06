@@ -9,6 +9,8 @@
       <% unless current_user == @user %>
         <% if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user) %>
           <%= link_to "Edit Friendship", edit_friendship_path(@friendship), class: "btn btn-warning" %>
+        <% elsif current_user.blocked_friends.include?(@user) %>
+          <span class="btn btn-success disabled">Add Friend</span>
         <% else %>
           <%= link_to "Add Friend", new_friendship_path(friend_id: @user.id), class: "btn btn-success", id: "add-friendship", data: { friend_id: @user.id } %>
         <% end %>

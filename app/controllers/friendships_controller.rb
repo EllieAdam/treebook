@@ -3,7 +3,7 @@ class FriendshipsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @friendships = current_user.friendships
+    @friendships = FriendshipDecorator.decorate_collection(friendship_association.all)
     respond_with @friendships
   end
 
@@ -11,6 +11,16 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.find(params[:id])
     if @friendship.accept!
       flash[:success] = "You are now friends with #{@friendship.friend.name}"
+    else
+      flash[:error] = 'Something went horribly wrong!'
+    end
+    redirect_to friendships_path
+  end
+
+  def block
+    @friendship = current_user.friendships.find(params[:id])
+    if @friendship.block!
+      flash[:success] = "You have blocked #{@friendship.friend.name} successfully"
     else
       flash[:error] = 'Something went horribly wrong!'
     end
@@ -66,6 +76,23 @@ class FriendshipsController < ApplicationController
       redirect_to friendships_path, success: "You are no longer friends."
     else
       redirect_to friendships_path, error: "Something went wrong. Looks like this friendship will last forever!"
+    end
+  end
+
+  private
+
+  def friendship_association
+    case params[:list]
+    when nil
+      @friendships = current_user.friendships
+    when 'blocked'
+      @friendships = current_user.blocked_friendships
+    when 'pending'
+      @friendships = current_user.pending_friendships
+    when 'requested'
+      @friendships = current_user.requested_friendships
+    when 'accepted'
+      @friendships = current_user.accepted_friendships
     end
   end
 

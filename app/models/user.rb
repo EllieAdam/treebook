@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   include Gravtastic
-  gravtastic  :secure => true,
-              :size => 70
+  gravtastic  :secure => true, :size => 70
 
   acts_as_voter
 
@@ -20,6 +19,12 @@ class User < ActiveRecord::Base
   has_many :requested_friendships, -> { where(state: 'requested') }, class_name: 'Friendship', foreign_key: 'user_id'
   has_many :requested_friends, through: :requested_friendships, source: :friend
 
+  has_many :blocked_friendships, -> { where(state: 'blocked') }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :blocked_friends, through: :blocked_friendships, source: :friend
+
+  has_many :accepted_friendships, -> { where(state: 'accepted') }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :accepted_friends, through: :accepted_friendships, source: :friend
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
@@ -33,5 +38,9 @@ class User < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     name_changed?
+  end
+
+  def has_blocked?(other_user)
+    blocked_friends.include?(other_user)
   end
 end

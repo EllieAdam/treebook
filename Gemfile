@@ -30,6 +30,7 @@ gem 'js-routes', '~> 1.0.0'
 
 group :development do
   gem 'quiet_assets', '~> 1.1.0'
+  #gem 'rails-erd', github: 'ready4god2513/rails-erd', branch: 'rails-4.2-support-fix'
 end
 
 group :test do

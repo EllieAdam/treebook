@@ -117,6 +117,13 @@ RSpec.describe FriendshipsController, :type => :controller do
   end
 
   describe "PUT accept" do
+    describe "when not logged in" do
+      it "redirects to the login page" do
+        put :accept, id: 1
+        expect(response).to redirect_to(login_path)
+      end
+    end
+
     describe "when logged in" do
       before do
         Friendship.request(user, user2)
@@ -145,6 +152,43 @@ RSpec.describe FriendshipsController, :type => :controller do
         friendship2 = Friendship.where(user_id: user2.id).first
         put :accept, id: friendship2.id
         expect(flash[:success]).to eq("You are now friends with #{friendship2.friend.name}")
+      end
+    end
+  end
+
+  describe "PUT block" do
+    describe "when not logged in" do
+      it "redirects to the login page" do
+        put :block, id: 1
+        expect(response).to redirect_to(login_path)
+      end
+    end
+
+    describe "when logged in" do
+      before do
+        Friendship.request(user, user2)
+        sign_in(user)
+      end
+
+      it "assigns a friendship variable" do
+        friendship = Friendship.first
+        put :block, id: friendship.id
+        expect(assigns(:friendship)).to eq(friendship)
+      end
+
+      it "changes the state of a frienship to blocked" do
+        friendship = Friendship.first
+        put :block, id: friendship.id
+        friendship.reload
+        expect(friendship.state).to eq("blocked")
+      end
+
+      it "blocks the other friendship" do
+        friendship = Friendship.first
+        friendship2 = Friendship.last
+        put :block, id: friendship.id
+        friendship2.reload
+        expect(friendship2.state).to eq("blocked")
       end
     end
   end

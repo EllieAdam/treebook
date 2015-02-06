@@ -1,3 +1,4 @@
+<% if current_user && !current_user.has_blocked?(status.user) %>
 <div class="status" id="<%= dom_id(status) %>">
   <div class="row">
     <div class="col-sm-2 col-md-1 col-lg-1">
@@ -16,31 +17,32 @@
           <li><%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
         </ul>
       </div>
-    <% end %>
-    <p><%= status.content %></p>
-    <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
-
-    <span id="<%= status.id %>" class="voting pull-right">
-      <span class="text-success"><%= status.cached_votes_up %></span>
-
-      <% if current_user.voted_up_on?(status) %>
-      <%= link_to upvote_status_path(status), method: :put, class: "uppie highlighted", remote: true do %>
-      <i class="fa fa-thumbs-o-up"></i><% end %>
-      <% else %>
-      <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %>
-      <i class="fa fa-thumbs-o-up"></i><% end %>
       <% end %>
-      |
-      <% if current_user.voted_down_on?(status) %>
-      <%= link_to downvote_status_path(status), method: :put, class: "downie highlighted", remote: true do %>
-      <i class="fa fa-thumbs-o-down"></i><% end %>
-      <% else %>
-      <%= link_to downvote_status_path(status), method: :put, class: "downie", remote: true do %>
-      <i class="fa fa-thumbs-o-down"></i><% end %>
-      <% end %>
+      <p><%= status.content %></p>
+      <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
 
-      <span class="text-danger"><%= status.cached_votes_down %></span>
-    </span>
+      <span id="<%= status.id %>" class="voting pull-right">
+        <span class="text-success"><%= status.cached_votes_up %></span>
+
+        <% if current_user.voted_up_on?(status) %>
+        <%= link_to upvote_status_path(status), method: :put, class: "uppie highlighted", remote: true do %>
+        <i class="fa fa-thumbs-o-up"></i><% end %>
+        <% else %>
+        <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %>
+        <i class="fa fa-thumbs-o-up"></i><% end %>
+        <% end %>
+        |
+        <% if current_user.voted_down_on?(status) %>
+        <%= link_to downvote_status_path(status), method: :put, class: "downie highlighted", remote: true do %>
+        <i class="fa fa-thumbs-o-down"></i><% end %>
+        <% else %>
+        <%= link_to downvote_status_path(status), method: :put, class: "downie", remote: true do %>
+        <i class="fa fa-thumbs-o-down"></i><% end %>
+        <% end %>
+
+        <span class="text-danger"><%= status.cached_votes_down %></span>
+      </span>
+    </div>
   </div>
 </div>
-</div>
+<% end %>
