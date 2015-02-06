@@ -26,8 +26,12 @@
     <%= submit_tag "Cancel friendship", class: "btn btn-danger" %>
   <% end %>
 </div>
+
 <div class="avatar span2">
-  <%= form_for @friendship, url: block_friendship_path(@friendship), method: :put, data: { confirm: 'This action cannot be undone! Are you sure?' } do |form| %>
-    <%= submit_tag "Block user", class: "btn btn-warning" %>
+  <% unless @friendship.state == 'blocked' %>
+    <%= form_for @friendship, url: block_friendship_path(@friendship), method: :put, data: { confirm: 'This action cannot be undone! Are you sure?' } do |form| %>
+      <%= submit_tag "Block user", class: "btn btn-warning" %>
+    <% end %>
   <% end %>
+
 </div>

@@ -1,11 +1,11 @@
 <h2>Friends List</h2>
 
 <div class="list-buttons">
-  <%= link_to "All", friendships_path, class: "btn btn-sm btn-primary" %>
-  <%= link_to "Active", friendships_path(list: 'accepted'), class: "btn btn-sm btn-primary" %>
-  <%= link_to "Pending", friendships_path(list: 'pending'), class: "btn btn-sm btn-primary" %>
-  <%= link_to "Requested", friendships_path(list: 'requested'), class: "btn btn-sm btn-primary" %>
-  <%= link_to "Blocked", friendships_path(list: 'blocked'), class: "btn btn-sm btn-primary" %>
+  <%= link_to "All", friendships_path, class: "btn btn-sm btn-default" %>
+  <%= link_to "Active", friendships_path(list: 'accepted'), class: "btn btn-sm btn-default" %>
+  <%= link_to "Pending", friendships_path(list: 'pending'), class: "btn btn-sm btn-default" %>
+  <%= link_to "Requested", friendships_path(list: 'requested'), class: "btn btn-sm btn-default" %>
+  <%= link_to "Blocked", friendships_path(list: 'blocked'), class: "btn btn-sm btn-default" %>
 </div>
 
 <div>
@@ -22,18 +22,12 @@
       </td>
       <td>
         <strong><%= link_to friend.name, profiles_path(friend) %></strong>
-        <% if friendship.pending? %>
-          <em>Pending</em>
-          <%= link_to 'Edit request', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
-        <% end %>
-        <% if friendship.requested? %>
-          <em>Requested</em>
-          <%= link_to 'Edit request', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %> 
-        <% end %>
-        <% if friendship.accepted? %>
-          <em>Active</em>
-          <%= link_to 'Edit request', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
-        <% end %>
+      </td>
+      <td>
+        <em><%= friendship.friendship_state %></em>
+      </td>
+      <td>
+        <%= link_to 'Edit', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
       </td>
     </tr>
   <% end %>
