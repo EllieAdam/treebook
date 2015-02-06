@@ -24,7 +24,7 @@
         <strong><%= link_to friend.name, profiles_path(friend) %></strong>
       </td>
       <td>
-        <em><%= friendship.friendship_state %></em>
+        <p class="<%= friendship.state_color_class %>"><%= friendship.friendship_state %></p>
       </td>
       <td>
         <%= link_to 'Edit', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>

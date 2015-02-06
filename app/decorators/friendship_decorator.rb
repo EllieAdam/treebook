@@ -5,6 +5,19 @@ class FriendshipDecorator < Draper::Decorator
     model.state.titleize
   end
 
+  def state_color_class
+    case model.state
+    when 'pending'
+      "text-warning"
+    when 'requested'
+      "text-warning"
+    when 'accepted'
+      "text-success"
+    when 'blocked'
+      "text-danger"
+    end
+  end
+
   def sub_message
     case model.state
     when 'pending'
