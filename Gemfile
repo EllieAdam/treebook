@@ -19,18 +19,12 @@ gem 'font-awesome-sass', '~> 4.3.0'
 gem 'draper', '~> 1.4.0'
 gem 'js-routes', '~> 1.0.0'
 gem 'will_paginate', '~> 3.0.7'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'puma'
 
 group :development do
   gem 'quiet_assets', '~> 1.1.0'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   #gem 'rails-erd', github: 'ready4god2513/rails-erd', branch: 'rails-4.2-support-fix'
 end
 
