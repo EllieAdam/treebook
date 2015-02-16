@@ -19,7 +19,7 @@ gem 'font-awesome-sass', '~> 4.3.0'
 gem 'draper', '~> 1.4.0'
 gem 'js-routes', '~> 1.0.0'
 gem 'will_paginate', '~> 3.0.7'
-gem 'puma'
+gem 'paranoia'
 
 group :development do
   gem 'quiet_assets', '~> 1.1.0'
@@ -46,6 +46,7 @@ group :development, :test do
   gem 'did_you_mean', '~> 0.9.5'
   gem 'rspec-rails', '~> 3.1.0'
   gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'puma'
 end
 
 group :production do

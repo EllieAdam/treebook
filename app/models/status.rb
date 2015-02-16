@@ -7,4 +7,9 @@ class Status < ActiveRecord::Base
   acts_as_votable
 
   self.per_page = 10
+
+  # This will ignore the deleted_at when finding user who created the status
+  def user
+    User.unscoped { super }
+  end
 end
