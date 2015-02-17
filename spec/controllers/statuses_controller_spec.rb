@@ -413,10 +413,10 @@ RSpec.describe StatusesController, :type => :controller do
 
       it "does not influence the upvotes" do
         status = Status.create! valid_attributes
-        expect(status.cached_votes_up).to eq(0)
+        expect(status.get_upvotes.size).to eq(0)
         put :upvote, id: status.id
         status.reload
-        expect(status.cached_votes_up).to eq(0)
+        expect(status.get_upvotes.size).to eq(0)
       end
     end
 
@@ -436,7 +436,7 @@ RSpec.describe StatusesController, :type => :controller do
         expect{
           xhr :put, :upvote, id: status.id
           status.reload
-        }.to change{ status.cached_votes_up }.from(0).to(1)
+        }.to change{ status.get_upvotes.size }.from(0).to(1)
       end
     end
   end
@@ -451,10 +451,10 @@ RSpec.describe StatusesController, :type => :controller do
 
       it "does not influence the downvotes" do
         status = Status.create! valid_attributes
-        expect(status.cached_votes_down).to eq(0)
+        expect(status.get_downvotes.size).to eq(0)
         put :downvote, id: status.id
         status.reload
-        expect(status.cached_votes_down).to eq(0)
+        expect(status.get_downvotes.size).to eq(0)
       end
     end
 
@@ -474,7 +474,7 @@ RSpec.describe StatusesController, :type => :controller do
         expect{
           xhr :put, :downvote, id: status.id
           status.reload
-        }.to change{ status.cached_votes_down }.from(0).to(1)
+        }.to change{ status.get_downvotes.size }.from(0).to(1)
       end
     end
   end

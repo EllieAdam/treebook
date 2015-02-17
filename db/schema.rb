@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216173847) do
+ActiveRecord::Schema.define(version: 20150217111602) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -39,25 +39,16 @@ ActiveRecord::Schema.define(version: 20150216173847) do
 
   create_table "statuses", force: :cascade do |t|
     t.text     "content"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "user_id"
-    t.integer  "cached_votes_total",      default: 0
-    t.integer  "cached_votes_score",      default: 0
-    t.integer  "cached_votes_up",         default: 0
-    t.integer  "cached_votes_down",       default: 0
-    t.integer  "cached_weighted_score",   default: 0
-    t.integer  "cached_weighted_total",   default: 0
-    t.float    "cached_weighted_average", default: 0.0
+    t.integer  "cached_votes_up",   default: 0
+    t.integer  "cached_votes_down", default: 0
   end
 
   add_index "statuses", ["cached_votes_down"], name: "index_statuses_on_cached_votes_down"
-  add_index "statuses", ["cached_votes_score"], name: "index_statuses_on_cached_votes_score"
-  add_index "statuses", ["cached_votes_total"], name: "index_statuses_on_cached_votes_total"
   add_index "statuses", ["cached_votes_up"], name: "index_statuses_on_cached_votes_up"
-  add_index "statuses", ["cached_weighted_average"], name: "index_statuses_on_cached_weighted_average"
-  add_index "statuses", ["cached_weighted_score"], name: "index_statuses_on_cached_weighted_score"
-  add_index "statuses", ["cached_weighted_total"], name: "index_statuses_on_cached_weighted_total"
+  add_index "statuses", ["created_at"], name: "index_statuses_on_created_at"
   add_index "statuses", ["user_id"], name: "index_statuses_on_user_id"
 
   create_table "users", force: :cascade do |t|

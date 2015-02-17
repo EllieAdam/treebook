@@ -31,7 +31,7 @@
       <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
 
       <span id="<%= status.id %>" class="voting pull-right">
-        <span class="text-success"><%= status.cached_votes_up %></span>
+        <span class="text-success"><%= status.get_upvotes.size %></span>
 
         <% if current_user.voted_up_on?(status) %>
         <%= link_to upvote_status_path(status), method: :put, class: "uppie highlighted", remote: true do %>
@@ -49,7 +49,7 @@
         <i class="fa fa-thumbs-o-down"></i><% end %>
         <% end %>
 
-        <span class="text-danger"><%= status.cached_votes_down %></span>
+        <span class="text-danger"><%= status.get_downvotes.size %></span>
       </span>
     </div>
   </div>
