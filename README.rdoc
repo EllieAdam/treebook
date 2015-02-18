@@ -2,13 +2,12 @@
 
 Social media app based on an outdated Treehouse course, completely rewritten and translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
 
-* Fix feature tests
-* Add comment tests
+* Add comment feature tests
 * Scope statuses instead of hiding blocked user statuses in views
 * Make Friendship listing more dynamic
 * Implement a working mailer
 * Work on profile pages
-* Add photo uploading (Paperclip?)
+* Add photo uploading (Paperclip? Refile?)
 * ...
 
 Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com
