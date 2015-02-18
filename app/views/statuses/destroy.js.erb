@@ -1,2 +1,2 @@
-$('#statuses').html("<%= j (render @statuses) %>");
+$('#statuses').html("<%= j (render @statuses) %><div class='stat'></div><div class='row row-centered'><%= j will_paginate @statuses %></div>");
 $('#statuses').trigger("statusesLoaded");

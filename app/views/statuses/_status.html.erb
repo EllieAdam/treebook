@@ -14,11 +14,12 @@
       <% else %>
       <strong><%= link_to status.user.name, profiles_path(status.user) %></strong>
       <% end %>
+      <span class="dimmed date"><%= time_ago_in_words(status.created_at) %> ago</span>
 
       <% if current_user && (status.user == current_user || current_user.admin == true) %>
       <div class="btn-group pull-right status-options">
         <a aria-expanded="false" href="#" class="dropdown-toggle dimmed" data-toggle="dropdown">
-          <i class="fa fa-chevron-down"></i>
+          <i class="fa fa-cog"></i>
         </a>
         <ul class="dropdown-menu">
           <li><%= link_to 'Edit', edit_status_path(status), remote: true %></li>
@@ -27,26 +28,27 @@
         </ul>
       </div>
       <% end %>
+
       <p><%= status.content %></p>
-      <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
+      <%= link_to "0 comments", "#", class: "dimmed" %>
 
       <span id="<%= status.id %>" class="voting pull-right">
         <span class="text-success"><%= status.get_upvotes.size %></span>
 
         <% if current_user.voted_up_on?(status) %>
         <%= link_to upvote_status_path(status), method: :put, class: "uppie highlighted", remote: true do %>
-        <i class="fa fa-thumbs-o-up"></i><% end %>
+        <i class="fa fa-thumbs-up"></i><% end %>
         <% else %>
-        <%= link_to upvote_status_path(status), method: :put, class: "uppie", remote: true do %>
-        <i class="fa fa-thumbs-o-up"></i><% end %>
+        <%= link_to upvote_status_path(status), method: :put, class: "uppie dimmed", remote: true do %>
+        <i class="fa fa-thumbs-up"></i><% end %>
         <% end %>
-        |
+
         <% if current_user.voted_down_on?(status) %>
         <%= link_to downvote_status_path(status), method: :put, class: "downie highlighted", remote: true do %>
-        <i class="fa fa-thumbs-o-down"></i><% end %>
+        <i class="fa fa-thumbs-down"></i><% end %>
         <% else %>
-        <%= link_to downvote_status_path(status), method: :put, class: "downie", remote: true do %>
-        <i class="fa fa-thumbs-o-down"></i><% end %>
+        <%= link_to downvote_status_path(status), method: :put, class: "downie dimmed", remote: true do %>
+        <i class="fa fa-thumbs-down"></i><% end %>
         <% end %>
 
         <span class="text-danger"><%= status.get_downvotes.size %></span>
