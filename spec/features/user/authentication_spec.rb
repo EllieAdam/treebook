@@ -14,7 +14,7 @@ feature "Logging in" do
 
     click_button 'Log in'
 
-    expect(page).to have_content('All Statuses')
+    expect(page).to have_content('Status Feed')
     expect(page).to have_content('Logged in successfully.')
   end
 

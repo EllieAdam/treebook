@@ -30,24 +30,24 @@
       <% end %>
 
       <p><%= status.content %></p>
-      <%= link_to "0 comments", "#", class: "dimmed" %>
+      <%= link_to status.comments.size.to_s + " comments", status, class: "dimmed" %>
 
       <span id="<%= status.id %>" class="voting pull-right">
         <span class="text-success"><%= status.get_upvotes.size %></span>
 
         <% if current_user.voted_up_on?(status) %>
-        <%= link_to upvote_status_path(status), method: :put, class: "uppie highlighted", remote: true do %>
+        <%= link_to upvote_status_path(status), method: :put, class: "dimmed uppie highlighted", remote: true do %>
         <i class="fa fa-thumbs-up"></i><% end %>
         <% else %>
-        <%= link_to upvote_status_path(status), method: :put, class: "uppie dimmed", remote: true do %>
+        <%= link_to upvote_status_path(status), method: :put, class: "dimmed uppie", remote: true do %>
         <i class="fa fa-thumbs-up"></i><% end %>
         <% end %>
 
         <% if current_user.voted_down_on?(status) %>
-        <%= link_to downvote_status_path(status), method: :put, class: "downie highlighted", remote: true do %>
+        <%= link_to downvote_status_path(status), method: :put, class: "dimmed downie highlighted", remote: true do %>
         <i class="fa fa-thumbs-down"></i><% end %>
         <% else %>
-        <%= link_to downvote_status_path(status), method: :put, class: "downie dimmed", remote: true do %>
+        <%= link_to downvote_status_path(status), method: :put, class: "dimmed downie", remote: true do %>
         <i class="fa fa-thumbs-down"></i><% end %>
         <% end %>
 

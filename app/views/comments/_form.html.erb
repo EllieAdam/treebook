@@ -1,0 +1,10 @@
+<%= form_for [@status, @status.comments.new] do |f| %>
+<div class="form-group">
+  <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
+    <%= f.text_field :body, autofocus: true, class: 'form-control', placeholder: "new comment" %>
+  </div>
+</div>
+<div class="actions">
+  <%= f.button "Comment", class: 'btn btn-default', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Commenting..." } %>
+</div>
+<% end %>

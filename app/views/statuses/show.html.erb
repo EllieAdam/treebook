@@ -1,5 +1,45 @@
-<p>
-  TEMPORARY VIEW FOR STATUS SHOW ACTION, SORRY :)<br><br>
-  <strong>Content:</strong>
-  <%= @status.content %>
-</p>
+<div class="status show" id="<%= dom_id(@status) %>">
+  <div class="row">
+    <div class="col-sm-2 col-md-1 col-lg-1">
+      <% if @status.user.deleted_at %>
+      <%= image_tag 'deleted_user.png', class: "gravie" %>
+      <% else %>
+      <%= image_tag @status.user.gravatar_url, class: "gravie" %>
+      <% end %>
+    </div>
+    <div class="col-sm-10 col-md-11 col-lg-11">
+      <% if @status.user.deleted_at %>
+      <strong>DELETED USER</strong>
+      <% else %>
+      <strong><%= link_to @status.user.name, profiles_path(@status.user) %></strong>
+      <% end %>
+      <span class="dimmed date"><%= time_ago_in_words(@status.created_at) %> ago</span>
+
+      <p><%= @status.content %></p>
+
+      <span id="<%= @status.id %>" class="voting pull-right">
+        <span class="text-success"><%= @status.get_upvotes.size %></span>
+
+        <% if current_user.voted_up_on?(@status) %>
+        <%= link_to upvote_status_path(@status), method: :put, class: "dimmed uppie highlighted", remote: true do %>
+        <i class="fa fa-thumbs-up"></i><% end %>
+        <% else %>
+        <%= link_to upvote_status_path(@status), method: :put, class: "dimmed uppie", remote: true do %>
+        <i class="fa fa-thumbs-up"></i><% end %>
+        <% end %>
+
+        <% if current_user.voted_down_on?(@status) %>
+        <%= link_to downvote_status_path(@status), method: :put, class: "dimmed downie highlighted", remote: true do %>
+        <i class="fa fa-thumbs-down"></i><% end %>
+        <% else %>
+        <%= link_to downvote_status_path(@status), method: :put, class: "dimmed downie", remote: true do %>
+        <i class="fa fa-thumbs-down"></i><% end %>
+        <% end %>
+
+        <span class="text-danger"><%= @status.get_downvotes.size %></span>
+      </span>
+    </div>
+  </div>
+</div>
+<%= render @comments %>
+<%= render partial: "comments/form" %>

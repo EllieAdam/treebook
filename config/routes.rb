@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'profiles/:id' => 'profiles#show', as: 'profiles'
 
   as :user do
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
       put "upvote", to: "statuses#upvote"
       put "downvote", to: "statuses#downvote"
     end
+    resources :comments, only: [:create, :destroy]
   end
 
   resources :friendships do

@@ -1,0 +1,17 @@
+<div class="comment">
+  <% if comment.user.deleted_at %>
+  <%= image_tag 'deleted_user.png', class: "comment-image" %>
+  DELETED USER
+  <% else %>
+  <%= image_tag comment.user.gravatar_url, class: "comment-image" %>
+  <%= link_to comment.user.name, profiles_path(comment.user) %>
+  <% end %>
+  ~
+  <%= comment.body %>
+
+  <% if current_user && (comment.user == current_user || current_user.admin == true) %>
+    <%= link_to status_comment_path(@status, comment), method: :delete, class: "dimmed" do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  <% end %>
+</div>

@@ -11,6 +11,7 @@ class StatusesController < ApplicationController
   end
 
   def show
+    @comments = @status.comments.all
     respond_with(@status)
   end
 

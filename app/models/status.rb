@@ -2,6 +2,7 @@ class Status < ActiveRecord::Base
   validates :content, presence: true, length: { minimum: 2 }
   validates :user_id, presence: true
 
+  has_many :comments, dependent: :destroy
   belongs_to :user
 
   acts_as_votable
