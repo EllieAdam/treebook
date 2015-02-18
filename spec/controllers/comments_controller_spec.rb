@@ -23,136 +23,96 @@ RSpec.describe CommentsController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # Comment. As you add validations to Comment, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:user) { create(:user) }
+  let(:status) { create(:status, user_id: user.id) }
+  let(:valid_attributes) { { body: "A new comment", status_id: status.id, user_id: user.id } }
+  let(:invalid_attributes) { { content: "", status_id: status.id, user_id: user.id } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CommentsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all comments as @comments" do
-      comment = Comment.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:comments)).to eq([comment])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested comment as @comment" do
-      comment = Comment.create! valid_attributes
-      get :show, {:id => comment.to_param}, valid_session
-      expect(assigns(:comment)).to eq(comment)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new comment as @comment" do
-      get :new, {}, valid_session
-      expect(assigns(:comment)).to be_a_new(Comment)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested comment as @comment" do
-      comment = Comment.create! valid_attributes
-      get :edit, {:id => comment.to_param}, valid_session
-      expect(assigns(:comment)).to eq(comment)
-    end
-  end
-
   describe "POST create" do
+
     describe "with valid params" do
-      it "creates a new Comment" do
-        expect {
-          post :create, {:comment => valid_attributes}, valid_session
-        }.to change(Comment, :count).by(1)
+      describe "when not logged in" do
+        it "redirects to the login page" do
+          post :create, {status_id: status.id, :comment => valid_attributes}
+          expect(response).to redirect_to(login_path)
+        end
+
+        it "does not create a Comment" do
+          expect {
+            post :create, {status_id: status.id, :comment => valid_attributes}
+          }.to change(Comment, :count).by(0)
+        end
       end
 
-      it "assigns a newly created comment as @comment" do
-        post :create, {:comment => valid_attributes}, valid_session
-        expect(assigns(:comment)).to be_a(Comment)
-        expect(assigns(:comment)).to be_persisted
-      end
+      describe "when logged in" do
+        before do
+          sign_in(user)
+        end
 
-      it "redirects to the created comment" do
-        post :create, {:comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(Comment.last)
-      end
-    end
+        it "creates a new Comment" do
+          expect {
+            post :create, {status_id: status.id, :comment => valid_attributes}
+          }.to change(Comment, :count).by(1)
+        end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved comment as @comment" do
-        post :create, {:comment => invalid_attributes}, valid_session
-        expect(assigns(:comment)).to be_a_new(Comment)
-      end
+        it "does not create an invalid Comment" do
+          expect {
+            post :create, {status_id: status.id, :comment => invalid_attributes}
+          }.to change(Comment, :count).by(0)
+        end
 
-      it "re-renders the 'new' template" do
-        post :create, {:comment => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
+        it "assigns a newly created comment as @comment" do
+          post :create, {status_id: status.id, :comment => valid_attributes}
+          expect(assigns(:comment)).to be_a(Comment)
+          expect(assigns(:comment)).to be_persisted
+        end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => new_attributes}, valid_session
-        comment.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested comment as @comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
-        expect(assigns(:comment)).to eq(comment)
-      end
-
-      it "redirects to the comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(comment)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the comment as @comment" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => invalid_attributes}, valid_session
-        expect(assigns(:comment)).to eq(comment)
-      end
-
-      it "re-renders the 'edit' template" do
-        comment = Comment.create! valid_attributes
-        put :update, {:id => comment.to_param, :comment => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        it "redirects to the comment's status" do
+          post :create, {status_id: status.id, :comment => valid_attributes}
+          expect(response).to redirect_to(status_path(status))
+        end
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested comment" do
-      comment = Comment.create! valid_attributes
-      expect {
-        delete :destroy, {:id => comment.to_param}, valid_session
-      }.to change(Comment, :count).by(-1)
+    describe "when logged in" do
+      before do
+        sign_in(user)
+      end
+
+      it "destroys the requested comment" do
+        comment = Comment.create! valid_attributes
+        expect {
+          delete :destroy, {status_id: status.id, :id => comment.to_param}
+        }.to change(Comment, :count).by(-1)
+      end
+
+      it "redirects to the comments list" do
+        comment = Comment.create! valid_attributes
+        delete :destroy, {status_id: status.id, :id => comment.to_param}
+        expect(response).to redirect_to(status_path(status))
+      end
     end
 
-    it "redirects to the comments list" do
-      comment = Comment.create! valid_attributes
-      delete :destroy, {:id => comment.to_param}, valid_session
-      expect(response).to redirect_to(comments_url)
+    describe "when not logged in" do
+      it "destroys the requested comment" do
+        comment = Comment.create! valid_attributes
+        expect {
+          delete :destroy, {status_id: status.id, :id => comment.to_param}
+        }.to change(Comment, :count).by(0)
+      end
+
+      it "redirects to the login page" do
+        comment = Comment.create! valid_attributes
+        delete :destroy, {status_id: status.id, :id => comment.to_param}
+        expect(response).to redirect_to(login_path)
+      end
     end
   end
 

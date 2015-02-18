@@ -8,26 +8,19 @@ feature "Creating friendship as user" do
     log_in(@user)
   end
 
-  scenario "successfully creates a new friendship" do
-    expect(Friendship.count).to eq(0)
+  scenario "successfully creates a new friendship", :js => true do
     visit profiles_path(@user2)
-    expect(page).to have_content("Add Friend")
     click_link "Add Friend"
-    expect(page).to have_content("Are you sure you want to request this friend?")
-    click_button "Yes, add friend"
-    expect(page).to have_content("Friend request sent.")
-    expect(Friendship.count).to eq(2)
+    expect(page).to have_content("Friendship Requested")
   end
 
-  scenario "creates a mutual friendship with requested state" do
+  scenario "creates a mutual friendship with requested state", :js => true do
     visit profiles_path(@user2)
     click_link "Add Friend"
-    click_button "Yes, add friend"
-    expect(page).to have_content("Friendship is pending")
     log_out(@user)
     log_in(@user2)
-    visit friendships_path
-    expect(page).to have_content("Friendship requested")
+    visit profiles_path(@user)
+    expect(page).to have_content("Edit Friendship")
   end
 
 end

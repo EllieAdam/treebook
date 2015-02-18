@@ -8,20 +8,23 @@ feature "Accepting friendship" do
     log_in(@user)
   end
 
-  scenario "makes both friendships accepted" do
+  scenario "makes both friendships accepted", :js => true do
     visit profiles_path(@user2)
     click_link "Add Friend"
-    click_button "Yes, add friend"
+
     log_out(@user)
     log_in(@user2)
+
     visit friendships_path
-    click_link "Accept request"
+    click_link "Edit"
     click_button "Accept friendship"
-    expect(page).to have_content("Friendship active")
+    expect(page).to have_content("Active")
+
     log_out(@user2)
     log_in(@user)
+    
     visit friendships_path
-    expect(page).to have_content("Friendship active")
+    expect(page).to have_content("Active")
   end
 
 end

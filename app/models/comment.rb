@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  validates :body, presence: true, length: { minimum: 2 }
+  validates :body, presence: true
   validates :user_id, presence: true
   validates :status_id, presence: true
 

@@ -11,22 +11,18 @@ feature "Upvoting" do
     visit statuses_path
     within('.text-success') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
     within('.text-danger') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
 
     find('.fa-thumbs-up').click
 
     within('.text-success') do
       expect(page).to have_content('1')
-      expect(page).to_not have_content('0')
     end
     within('.text-danger') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
   end
 
@@ -34,15 +30,18 @@ feature "Upvoting" do
     visit statuses_path
 
     find('.fa-thumbs-up').click
+
+    within('.text-success') do
+      expect(page).to have_content('1')
+    end
+
     find('.fa-thumbs-up').click
 
     within('.text-success') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
     within('.text-danger') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
   end
 
@@ -53,22 +52,18 @@ feature "Upvoting" do
 
     within('.text-success') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
     within('.text-danger') do
       expect(page).to have_content('1')
-      expect(page).to_not have_content('0')
     end
 
     find('.fa-thumbs-up').click
 
     within('.text-success') do
       expect(page).to have_content('1')
-      expect(page).to_not have_content('0')
     end
     within('.text-danger') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
   end
 end
@@ -84,22 +79,18 @@ feature "Downvoting" do
     visit statuses_path
     within('.text-success') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
     within('.text-danger') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
 
     find('.fa-thumbs-down').click
 
     within('.text-success') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
     within('.text-danger') do
       expect(page).to have_content('1')
-      expect(page).to_not have_content('0')
     end
   end
 
@@ -107,15 +98,18 @@ feature "Downvoting" do
     visit statuses_path
 
     find('.fa-thumbs-down').click
+
+    within('.text-danger') do
+      expect(page).to have_content('1')
+    end
+
     find('.fa-thumbs-down').click
 
     within('.text-success') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
     within('.text-danger') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
   end
 
@@ -126,22 +120,18 @@ feature "Downvoting" do
 
     within('.text-success') do
       expect(page).to have_content('1')
-      expect(page).to_not have_content('0')
     end
     within('.text-danger') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
 
     find('.fa-thumbs-down').click
 
     within('.text-success') do
       expect(page).to have_content('0')
-      expect(page).to_not have_content('1')
     end
     within('.text-danger') do
       expect(page).to have_content('1')
-      expect(page).to_not have_content('0')
     end
   end
 end

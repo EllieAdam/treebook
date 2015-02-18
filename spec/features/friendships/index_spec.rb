@@ -13,11 +13,11 @@ feature "Friendship index page" do
     log_in(@user1)
   end
 
-  scenario "shows logged-in user's friendships" do
+  scenario "shows all logged-in user's friendships" do
     visit friendships_path
-    expect(page).to have_content("Friendship is pending")
-    expect(page).to have_content("Friendship active")
-    expect(page).to_not have_content("Friendship requested")
+    expect(page).to have_content("Pending")
+    expect(page).to have_content("Active")
+    expect(page).to have_content("Requested")
   end
 
 end
