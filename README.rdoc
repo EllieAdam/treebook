@@ -21,7 +21,7 @@ Some major differences compared to the original project:
 * Bootswatch Slate theme instead of vanilla Bootstrap
 * aasm gem instead of state_machine gem which is no longer maintained
 * friendly_id gem for creating unique slugs for users
-* ~~gravtastic~~ gravatarify gem for taking care of Gravatars
+* <del>gravtastic</del> gravatarify gem for taking care of Gravatars
 * RSpec/Factory Girl/Capybara/Capybara Webkit for testing
 * lambdas instead of conditions in model relationships
 * upvoting/downvoting feature (ajaxified)

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attachment :profile_image
+  attachment :profile_image, type: :image
 
   acts_as_voter
   acts_as_paranoid
