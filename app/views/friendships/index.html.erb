@@ -18,7 +18,7 @@
     <% friend = friendship.friend %>
     <tr id="<%= dom_id(friendship) %>">
       <td>
-        <%= image_tag friend.gravatar_url, class: "gravie" %>
+        <%= image_for(friend, 28) %> <!-- Find me in application_helper -->
       </td>
       <td>
         <strong><%= link_to friend.name, profiles_path(friend) %></strong>

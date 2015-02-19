@@ -1,11 +1,7 @@
 <div class="status show" id="<%= dom_id(@status) %>">
   <div class="row">
     <div class="col-sm-2 col-md-1 col-lg-1">
-      <% if @status.user.deleted_at %>
-      <%= image_tag 'deleted_user.png', class: "gravie" %>
-      <% else %>
-      <%= image_tag @status.user.gravatar_url, class: "gravie" %>
-      <% end %>
+    <%= image_for(@status.user, 74) %> <!-- Find me in application_helper -->
     </div>
     <div class="col-sm-10 col-md-11 col-lg-11">
       <% if @status.user.deleted_at %>

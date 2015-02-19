@@ -3,21 +3,12 @@
   <div class="row">
 
     <div class="col-sm-2 col-md-1 col-lg-1">
-      <% if status.user.deleted_at? %>
-        <%= image_tag 'deleted_user.png', class: "gravie" %>
-      <% elsif status.user.profile_image_id? %>
-        <%= image_tag attachment_url(status.user, :profile_image, :fill, 74, 74), class: "gravie" %>
-      <% else %>
-          <%= gravatar_tag status.user.email, :size => 74, :html => { :class => "gravie" } %>
-      <% end %>
+      <%= image_for(status.user, 74) %> <!-- Find me in application_helper -->
     </div>
 
     <div class="col-sm-10 col-md-11 col-lg-11">
-      <% if status.user.deleted_at %>
-      <strong>DELETED USER</strong>
-      <% else %>
-      <strong><%= link_to status.user.name, profiles_path(status.user) %></strong>
-      <% end %>
+      <strong><%= name_for(status.user) %></strong>
+      
       <span class="dimmed date"><%= time_ago_in_words(status.created_at) %> ago</span>
 
       <% if current_user && (status.user == current_user || current_user.admin == true) %>

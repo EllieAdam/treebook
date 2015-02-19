@@ -2,11 +2,11 @@
 
 
 <div class="avatar span2">
-  <%= image_tag @friendship.user.gravatar_url, class: 'gravie' %><br />
+  <%= image_for(@friendship.user, 74) %><br /> <!-- Find me in application_helper -->
   <%= @friendship.user.name %>
 </div>
 <div class="avatar span2">
-  <%= image_tag @friendship.friend.gravatar_url, class: 'gravie' %><br />
+  <%= image_for(@friendship.friend, 74) %><br /> <!-- Find me in application_helper -->
   <%= @friendship.friend.name %>
 </div>
 

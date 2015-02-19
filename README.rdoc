@@ -7,7 +7,6 @@ Social media app based on an outdated Treehouse course, completely rewritten and
 * Make Friendship listing more dynamic
 * Implement a working mailer
 * Work on profile pages
-* Add photo uploading (Paperclip? Refile?)
 * ...
 
 Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com
@@ -22,9 +21,10 @@ Some major differences compared to the original project:
 * Bootswatch Slate theme instead of vanilla Bootstrap
 * aasm gem instead of state_machine gem which is no longer maintained
 * friendly_id gem for creating unique slugs for users
-* gravtastic gem for taking care of Gravatars
+* ~~gravtastic~~ gravatarify gem for taking care of Gravatars
 * RSpec/Factory Girl/Capybara/Capybara Webkit for testing
 * lambdas instead of conditions in model relationships
 * upvoting/downvoting feature (ajaxified)
 * Status pagination with will_paginate gem
+* Avatar uploading or fetching from URL using refile gem
 * ...

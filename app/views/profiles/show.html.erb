@@ -1,6 +1,6 @@
 <div class="row">
   <div class="column">
-    <%= image_tag @user.gravatar_url, class: "gravie" %>
+    <%= image_for(@user, 74) %> <!-- Find me in application_helper -->
   </div>
   <div class="column">
     <h2><%= @user.name %>'s Profile</h2>

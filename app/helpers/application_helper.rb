@@ -15,4 +15,22 @@ module ApplicationHelper
     end
     nil
   end
+
+  def image_for(user, size)
+    if user.deleted_at?
+      image_tag('deleted_user.png', class: "gravie",  height: size, width: size)
+    elsif user.profile_image_id?
+      image_tag(attachment_url(user, :profile_image, :fill, size, size), class: "gravie")
+    else
+      gravatar_tag(user.email, :size => size, :html => { :class => "gravie" })
+    end
+  end
+
+  def name_for(user)
+    if user.deleted_at
+      content_tag(:span, 'DELETED USER')
+    else
+      link_to(user.name, profiles_path(user))
+    end
+  end
 end

@@ -1,11 +1,6 @@
 <div class="comment">
-  <% if comment.user.deleted_at %>
-  <%= image_tag 'deleted_user.png', class: "comment-image" %>
-  DELETED USER
-  <% else %>
-  <%= image_tag comment.user.gravatar_url, class: "comment-image" %>
-  <%= link_to comment.user.name, profiles_path(comment.user) %>
-  <% end %>
+  <%= image_for(comment.user, 28) %> <!-- Find me in application_helper -->
+  <%= name_for(comment.user) %>
   ~
   <%= comment.body %>
 
