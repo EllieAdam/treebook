@@ -3,34 +3,41 @@
 
 <div class="avatar span2">
   <%= image_for(@friendship.user, 74) %><br /> <!-- Find me in application_helper -->
-  <%= @friendship.user.name %>
+  <strong><%= @friendship.user.name %></strong>
 </div>
 <div class="avatar span2">
   <%= image_for(@friendship.friend, 74) %><br /> <!-- Find me in application_helper -->
-  <%= @friendship.friend.name %>
+  <strong><%= @friendship.friend.name %></strong>
 </div>
 
 <p><%= @friendship.sub_message %></p>
 
-
 <% if @friendship.requested? %>
   <div class="avatar span2">
     <%= form_for @friendship, url: accept_friendship_path(@friendship), method: :put do |form| %>
-      <%= submit_tag "Accept friendship", class: "btn btn-success" %>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-check"></i> Accept Friendship
+      </button>
+    <% end %>
+  </div>
+<% end %>
+
+<% unless @friendship.blocked? %>
+  <div class="avatar span2">
+    <%= form_for @friendship, url: friendship_path(@friendship), method: :delete do |form| %>
+      <button type="submit" class="btn btn-danger">
+        <i class="fa fa-times"></i> Cancel Friendship
+      </button>
     <% end %>
   </div>
 <% end %>
 
 <div class="avatar span2">
-  <%= form_for @friendship, url: friendship_path(@friendship), method: :delete do |form| %>
-    <%= submit_tag "Cancel friendship", class: "btn btn-danger" %>
-  <% end %>
-</div>
-
-<div class="avatar span2">
   <% unless @friendship.state == 'blocked' %>
     <%= form_for @friendship, url: block_friendship_path(@friendship), method: :put, data: { confirm: 'This action cannot be undone! Are you sure?' } do |form| %>
-      <%= submit_tag "Block user", class: "btn btn-warning" %>
+      <button type="submit" class="btn btn-warning">
+        <i class="fa fa-ban"></i> Block User
+      </button>
     <% end %>
   <% end %>
 

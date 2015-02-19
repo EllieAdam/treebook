@@ -19,12 +19,12 @@ Mailer temporarily disabled to prevent problems in production.
 Some major differences compared to the original project:
 
 * Bootswatch Slate theme instead of vanilla Bootstrap
-* aasm gem instead of state_machine gem which is no longer maintained
-* friendly_id gem for creating unique slugs for users
-* <del>gravtastic</del> gravatarify gem for taking care of Gravatars
+* Aasm gem instead of state_machine gem which is no longer maintained
+* Friendly_id gem for creating unique slugs for users
+* Gravatarify gem for taking care of Gravatars
 * RSpec/Factory Girl/Capybara/Capybara Webkit for testing
-* lambdas instead of conditions in model relationships
-* upvoting/downvoting feature (ajaxified)
+* Lambdas instead of conditions in model relationships
+* Upvoting/downvoting feature (ajaxified)
 * Status pagination with will_paginate gem
 * Avatar uploading or fetching from URL using refile gem
 * ...

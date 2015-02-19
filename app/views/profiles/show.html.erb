@@ -8,11 +8,15 @@
     <span id="friending">
       <% unless current_user == @user %>
         <% if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user) || current_user.requested_friends.include?(@user) %>
-          <%= link_to "Edit Friendship", edit_friendship_path(@friendship), class: "btn btn-warning" %>
+          <%= link_to edit_friendship_path(@friendship), class: "btn btn-warning" do %>
+            <i class="fa fa-edit"></i> Edit Friendship
+          <% end %>
         <% elsif current_user.blocked_friends.include?(@user) %>
-          <span class="btn btn-success disabled">Add Friend</span>
+          <span class="btn btn-success disabled"><i class="fa fa-plus"></i> Add Friend</span>
         <% else %>
-          <%= link_to "Add Friend", new_friendship_path(friend_id: @user.id), class: "btn btn-success", id: "add-friendship", data: { friend_id: @user.id } %>
+          <%= link_to new_friendship_path(friend_id: @user.id), class: "btn btn-success", id: "add-friendship", data: { friend_id: @user.id } do %>
+            <i class="fa fa-plus"></i> Add Friend
+          <% end%>
         <% end %>
       <% end %>
     </span>

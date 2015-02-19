@@ -17,12 +17,12 @@ feature "Accepting friendship" do
 
     visit friendships_path
     click_link "Edit"
-    click_button "Accept friendship"
+    click_button "Accept Friendship"
     expect(page).to have_content("Active")
 
     log_out(@user2)
     log_in(@user)
-    
+
     visit friendships_path
     expect(page).to have_content("Active")
   end

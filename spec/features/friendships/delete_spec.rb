@@ -12,7 +12,7 @@ feature "Deleting friendship" do
 
   scenario "successfully deletes a friendship and a mutual object" do
     visit edit_friendship_path(@friendship)
-    click_button "Cancel friendship"
+    click_button "Cancel Friendship"
     expect(page).to have_content("You are no longer friends.")
     expect(page).to have_content("There are no friendships to view! Don't be shy, add some friends :)")
     log_out(@user)

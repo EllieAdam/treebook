@@ -27,7 +27,9 @@
         <p class="<%= friendship.state_color_class %>"><%= friendship.friendship_state %></p>
       </td>
       <td>
-        <%= link_to 'Edit', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
+        <% unless friendship.blocked? %>
+          <%= link_to 'Edit', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
+        <% end %>
       </td>
     </tr>
   <% end %>

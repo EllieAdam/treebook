@@ -1,6 +1,10 @@
 <h2>Status Feed</h2>
 
-<div id="status-maker"><%= link_to "New Status", new_status_path, class: "btn btn-default submitter", remote: true %></div>
+<div id="status-maker">
+  <%= link_to new_status_path, class: "btn btn-default submitter", remote: true do %>
+    <i class="fa fa-plus"></i> New Status
+  <% end %>
+</div>
 
 <div id="status-form" style="display:none;"></div>
 
