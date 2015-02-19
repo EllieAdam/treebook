@@ -8,14 +8,14 @@
           <legend>Edit Account</legend>
 
           <div class="form-group">
-            <%= f.label :name, class: 'col-lg-2 control-label' %>
+            <%= f.label :name, "Name**", class: 'col-lg-2 control-label' %>
             <div class="col-lg-10">
               <%= f.text_field :name, autofocus: true, class: 'form-control' %>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :email, class: 'col-lg-2 control-label' %>
+            <%= f.label :email, "Email**", class: 'col-lg-2 control-label' %>
             <div class="col-lg-10">
               <%= f.email_field :email, class: 'form-control' %>
             </div>
@@ -30,19 +30,53 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :password_confirmation, "Confirm password", class: 'col-lg-2 control-label' %>
+            <%= f.label :password_confirmation, "Confirm password", class: 'col-lg-2 control-label long-label' %>
             <div class="col-lg-10">
               <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
             </div>
           </div>
 
           <div class="form-group">
-            <%= f.label :current_password, class: 'col-lg-2 control-label' %>
+            <%= f.label :current_password, "Current password**", class: 'col-lg-2 control-label long-label' %>
             <div class="col-lg-10">
               <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
               <span class="help-block">we need your current password to confirm your changes</span>
             </div>
           </div>
+
+          <legend>Profile image (optional)</legend>
+
+          <div class="form-group">
+            <%= f.label :profile_image, "Attach image", class: 'col-lg-2 control-label long-label' %>
+            <div class="col-lg-10">
+              <%= f.attachment_field :profile_image, class: "image-upload" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :remote_profile_image_url, "URL", class: 'col-lg-2 control-label' %>
+            <div class="col-lg-10">
+              <%= f.text_field :remote_profile_image_url, class: 'form-control' %>
+            </div>
+          </div>
+
+          <% if resource.profile_image_id? %>
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Current image</label>
+              <div class="col-lg-10">
+                <%= image_tag attachment_url(resource, :profile_image, :fill, 74, 74) %>
+              </div>
+
+              <label class="col-lg-2 control-label"></label>
+              <div class="col-lg-10">
+                <div class="checkbox">
+                  <label>
+                    <%= f.check_box :remove_profile_image %> <%= f.label :remove_profile_image, "Remove current image" %>
+                  </label>
+                </div>
+              </div>
+            </div>
+          <% end %>
 
           <div class="actions">
             <%= f.button "Update", class: 'btn btn-default btn-lg btn-block', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating..." } %>

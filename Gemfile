@@ -12,7 +12,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'friendly_id', '~> 5.1.0'
-gem 'gravtastic', '~> 3.2.6'
 gem 'aasm', '~> 4.0.8'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'font-awesome-sass', '~> 4.3.0'
@@ -20,6 +19,9 @@ gem 'draper', '~> 1.4.0'
 gem 'js-routes', '~> 1.0.0'
 gem 'will_paginate', '~> 3.0.7'
 gem 'paranoia'
+gem 'gravatarify', '~> 3.0.0'
+gem "mini_magick"
+gem "refile", require: ["refile/rails", "refile/image_processing"]
 
 group :development do
   gem 'quiet_assets', '~> 1.1.0'

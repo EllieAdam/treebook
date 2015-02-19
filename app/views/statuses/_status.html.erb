@@ -3,10 +3,12 @@
   <div class="row">
 
     <div class="col-sm-2 col-md-1 col-lg-1">
-      <% if status.user.deleted_at %>
-      <%= image_tag 'deleted_user.png', class: "gravie" %>
+      <% if status.user.deleted_at? %>
+        <%= image_tag 'deleted_user.png', class: "gravie" %>
+      <% elsif status.user.profile_image_id? %>
+        <%= image_tag attachment_url(status.user, :profile_image, :fill, 74, 74), class: "gravie" %>
       <% else %>
-      <%= image_tag status.user.gravatar_url, class: "gravie" %>
+          <%= gravatar_tag status.user.email, :size => 74, :html => { :class => "gravie" } %>
       <% end %>
     </div>
 

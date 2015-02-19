@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  include Gravtastic
-  gravtastic  :secure => true, :size => 70
+  attachment :profile_image
 
   acts_as_voter
   acts_as_paranoid

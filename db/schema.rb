@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218104933) do
+ActiveRecord::Schema.define(version: 20150219000507) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20150218104933) do
     t.datetime "updated_at"
     t.string   "slug"
     t.datetime "deleted_at"
+    t.string   "profile_image_id"
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at"
