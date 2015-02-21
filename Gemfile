@@ -14,7 +14,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'friendly_id', '~> 5.1'
 gem 'aasm', '~> 4.0.8'
 gem 'acts_as_votable', '~> 0.10'
-gem 'font-awesome-sass', '~> 4.3'
 gem 'draper', '~> 1.4'
 gem 'js-routes', '~> 1.0'
 gem 'will_paginate', '~> 3.0'
