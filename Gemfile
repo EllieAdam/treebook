@@ -22,6 +22,7 @@ gem 'paranoia'
 gem 'gravatarify', '~> 3.0'
 gem "mini_magick"
 gem "refile", require: ["refile/rails", "refile/image_processing"]
+gem 'puma'
 
 group :development do
   gem 'quiet_assets', '~> 1.1'
@@ -48,7 +49,6 @@ group :development, :test do
   gem 'did_you_mean', '~> 0.9'
   gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails', '~> 4.5'
-  gem 'puma'
 end
 
 group :production do

@@ -18,3 +18,4 @@
 //= require statuses
 //= require js-routes
 //= require friendships
+//= require refile
