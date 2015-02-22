@@ -6,6 +6,5 @@ aws = {
   bucket: ENV["S3_BUCKET"],
 }
 
-Refile.host = "//d3qsrkjdadnces.cloudfront.net"
 Refile.cache = Refile::Backend::S3.new(prefix: "cache", **aws)
 Refile.store = Refile::Backend::S3.new(prefix: "store", **aws)
