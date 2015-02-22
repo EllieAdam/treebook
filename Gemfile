@@ -19,16 +19,16 @@ gem 'js-routes', '~> 1.0'
 gem 'will_paginate', '~> 3.0'
 gem 'paranoia'
 gem 'gravatarify', '~> 3.0'
-gem "mini_magick"
-gem "refile", require: ["refile/rails", "refile/image_processing"]
-gem "aws-sdk", '< 2'
+gem 'mini_magick'
+gem 'refile', require: ["refile/rails", "refile/image_processing"]
+gem 'aws-sdk', '< 2'
+gem 'foreman'
 gem 'puma'
 
 group :development do
   gem 'quiet_assets', '~> 1.1'
   gem 'better_errors'
   gem 'binding_of_caller'
-  #gem 'rails-erd', github: 'ready4god2513/rails-erd', branch: 'rails-4.2-support-fix'
 end
 
 group :test do
