@@ -43,7 +43,7 @@
           <div class="form-group">
             <%= f.label :profile_image, "Attach image", class: 'col-lg-2 control-label long-label' %>
             <div class="col-lg-10">
-              <%= f.attachment_field :profile_image, class: "image-upload" %>
+              <%= f.attachment_field :profile_image, direct: true, presigned: true, class: "image-upload" %>
             </div>
           </div>
 

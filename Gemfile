@@ -21,6 +21,7 @@ gem 'paranoia'
 gem 'gravatarify', '~> 3.0'
 gem "mini_magick"
 gem "refile", require: ["refile/rails", "refile/image_processing"]
+gem "aws-sdk", '< 2'
 gem 'puma'
 
 group :development do
