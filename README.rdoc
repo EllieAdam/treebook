@@ -6,7 +6,8 @@ Social media app based on an outdated Treehouse course, completely rewritten and
 * Scope statuses instead of hiding blocked user statuses in views
 * Make Friendship listing more dynamic
 * Implement a working mailer
-* Work on profile pages
+* Work on profile pages (more info from users? bio? favorite quote?)
+* Add OmniAuth for Google and Facebook
 * ...
 
 Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com

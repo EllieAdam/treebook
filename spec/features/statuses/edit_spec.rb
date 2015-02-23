@@ -5,13 +5,12 @@ feature "Editing statuses" do
   background do
     @user = create(:user)
     @admin = create(:admin)
-    @status = Status.create(content: "I want to go home.", user_id: @user.id)
+    @status = @user.statuses.create(content: "I want to go home.")
   end
 
   scenario "updates status with proper content as admin", :js => true do
     log_in(@admin)
-    expect(Status.count).to eq(1)
-    expect(@status.user_id).to eq(@user.id)
+
     visit statuses_path
 
     within dom_id_for(@status) do
@@ -31,8 +30,7 @@ feature "Editing statuses" do
 
   scenario "updates status with proper content as user", :js => true do
     log_in(@user)
-    expect(Status.count).to eq(1)
-    expect(@status.user_id).to eq(@user.id)
+
     visit statuses_path
 
     within dom_id_for(@status) do
@@ -52,6 +50,7 @@ feature "Editing statuses" do
 
   scenario "cancels update properly", :js => true do
     log_in(@user)
+
     within dom_id_for(@status) do
       find('.status-options').click
       click_link 'Edit'
@@ -70,6 +69,7 @@ feature "Editing statuses" do
 
   scenario "displays error when status content is missing on update", :js => true do
     log_in(@user)
+
     within dom_id_for(@status) do
       find('.status-options').click
       click_link 'Edit'
@@ -86,6 +86,7 @@ feature "Editing statuses" do
 
   scenario "displays error when status content is shorter than 2 characters", :js => true do
     log_in(@user)
+
     within dom_id_for(@status) do
       find('.status-options').click
       click_link 'Edit'

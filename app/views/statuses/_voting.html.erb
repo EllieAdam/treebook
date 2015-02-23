@@ -3,18 +3,18 @@
 
   <% if current_user.voted_up_on?(status) %>
   <%= link_to upvote_status_path(status), method: :put, class: "dimmed uppie highlighted", remote: true do %>
-  <i class="fa fa-thumbs-up"></i><% end %>
+  <i class="fa fa-thumbs-up"><span class="text-hide">Upvote</span></i><% end %>
   <% else %>
   <%= link_to upvote_status_path(status), method: :put, class: "dimmed uppie", remote: true do %>
-  <i class="fa fa-thumbs-up"></i><% end %>
+  <i class="fa fa-thumbs-up"><span class="text-hide">Upvote</span></i><% end %>
   <% end %>
 
   <% if current_user.voted_down_on?(status) %>
   <%= link_to downvote_status_path(status), method: :put, class: "dimmed downie highlighted", remote: true do %>
-  <i class="fa fa-thumbs-down"></i><% end %>
+  <i class="fa fa-thumbs-down"><span class="text-hide">Downvote</span></i><% end %>
   <% else %>
   <%= link_to downvote_status_path(status), method: :put, class: "dimmed downie", remote: true do %>
-  <i class="fa fa-thumbs-down"></i><% end %>
+  <i class="fa fa-thumbs-down"><span class="text-hide">Downvote</span></i><% end %>
   <% end %>
 
   <span class="text-danger"><%= status.cached_votes_down %></span>

@@ -43,6 +43,8 @@ RSpec.configure do |config|
   config.before(:each) do |example|
     if example.metadata[:js]
       page.driver.block_unknown_urls
+      page.driver.allow_url("http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+
       DatabaseCleaner.strategy = :truncation
     else
       DatabaseCleaner.strategy = :transaction

@@ -16,7 +16,7 @@ feature "Upvoting" do
       expect(page).to have_content('0')
     end
 
-    find('.fa-thumbs-up').click
+    click_link "Upvote"
 
     within('.text-success') do
       expect(page).to have_content('1')
@@ -29,13 +29,13 @@ feature "Upvoting" do
   scenario "removes the upvote when clicked again", :js => true do
     visit statuses_path
 
-    find('.fa-thumbs-up').click
+    click_link "Upvote"
 
     within('.text-success') do
       expect(page).to have_content('1')
     end
 
-    find('.fa-thumbs-up').click
+    click_link "Upvote"
 
     within('.text-success') do
       expect(page).to have_content('0')
@@ -48,7 +48,7 @@ feature "Upvoting" do
   scenario "removes the downvote and increases upvotes", :js => true do
     visit statuses_path
 
-    find('.fa-thumbs-down').click
+    click_link "Downvote"
 
     within('.text-success') do
       expect(page).to have_content('0')
@@ -57,7 +57,7 @@ feature "Upvoting" do
       expect(page).to have_content('1')
     end
 
-    find('.fa-thumbs-up').click
+    click_link "Upvote"
 
     within('.text-success') do
       expect(page).to have_content('1')
@@ -84,7 +84,7 @@ feature "Downvoting" do
       expect(page).to have_content('0')
     end
 
-    find('.fa-thumbs-down').click
+    click_link "Downvote"
 
     within('.text-success') do
       expect(page).to have_content('0')
@@ -97,13 +97,13 @@ feature "Downvoting" do
   scenario "removes the downvote when clicked again", :js => true do
     visit statuses_path
 
-    find('.fa-thumbs-down').click
+    click_link "Downvote"
 
     within('.text-danger') do
       expect(page).to have_content('1')
     end
 
-    find('.fa-thumbs-down').click
+    click_link "Downvote"
 
     within('.text-success') do
       expect(page).to have_content('0')
@@ -116,7 +116,7 @@ feature "Downvoting" do
   scenario "removes the upvote and increases downvotes", :js => true do
     visit statuses_path
 
-    find('.fa-thumbs-up').click
+    click_link "Upvote"
 
     within('.text-success') do
       expect(page).to have_content('1')
@@ -125,7 +125,7 @@ feature "Downvoting" do
       expect(page).to have_content('0')
     end
 
-    find('.fa-thumbs-down').click
+    click_link "Downvote"
 
     within('.text-success') do
       expect(page).to have_content('0')
