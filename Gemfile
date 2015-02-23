@@ -19,6 +19,7 @@ gem 'js-routes', '~> 1.0'
 gem 'will_paginate', '~> 3.0'
 gem 'paranoia'
 gem 'gravatarify', '~> 3.0'
+gem "mini_magick"
 gem 'paperclip', '~> 4.2'
 gem 'aws-sdk', '< 2'
 gem 'foreman'
