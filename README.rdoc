@@ -26,5 +26,6 @@ Some major differences compared to the original project:
 * Lambdas instead of conditions in model relationships
 * Upvoting/downvoting feature (ajaxified)
 * Status pagination with will_paginate gem
-* Avatar uploading or fetching from URL using refile gem
+* Avatar uploading or fetching from URL using paperclip gem
+* Integration with S3 uploads and CloudFront CDN
 * ...

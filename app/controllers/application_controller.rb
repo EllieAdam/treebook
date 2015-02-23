@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :name << :profile_image << :remote_profile_image_url << :remove_profile_image << :profile_image_cache_id
-    devise_parameter_sanitizer.for(:account_update) << :name << :profile_image << :remote_profile_image_url << :remove_profile_image << :profile_image_cache_id
+    devise_parameter_sanitizer.for(:sign_up) << :name << :image
+    devise_parameter_sanitizer.for(:account_update) << :name << :image
   end
 end

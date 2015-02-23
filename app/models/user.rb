@@ -1,9 +1,21 @@
 class User < ActiveRecord::Base
-  attachment :profile_image, type: :image
+  has_attached_file :image,
+              styles: { icon: "28x28^", small: "74x74^", medium: "100x100^" },
+              convert_options: {
+                icon: " -gravity center -crop '28x28+0+0'",
+                small: " -gravity center -crop '74x74+0+0'",
+                medium: " -gravity center -crop '100x100+0+0'" },
+              default_style: :small,
+              storage: :s3,
+              url: ':s3_alias_url',
+              s3_host_alias: 'd3qsrkjdadnces.cloudfront.net',
+              bucket: ENV['S3_BUCKET'],
+              path: "images/:class/:basename_:id.:style.:extension"
 
   acts_as_voter
   acts_as_paranoid
 
+  validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
   validates :name, presence: true, uniqueness: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -18,7 +18,7 @@
     <% friend = friendship.friend %>
     <tr id="<%= dom_id(friendship) %>">
       <td>
-        <%= image_for(friend, 28) %> <!-- Find me in application_helper -->
+        <%= image_for(friend, :icon, 28) %> <!-- Find me in application_helper -->
       </td>
       <td>
         <strong><%= link_to friend.name, profiles_path(friend) %></strong>

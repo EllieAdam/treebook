@@ -16,13 +16,13 @@ module ApplicationHelper
     nil
   end
 
-  def image_for(user, size)
+  def image_for(user, size, dimension)
     if user.deleted_at?
-      image_tag('deleted_user.png', class: "gravie",  height: size, width: size)
-    elsif user.profile_image_id?
-      image_tag(attachment_url(user, :profile_image, :fill, size, size), class: "gravie")
+      image_tag('deleted_user.png', class: "gravie",  height: dimension, width: dimension)
+    elsif user.image?
+      image_tag(user.image.url(size), class: "gravie")
     else
-      gravatar_tag(user.email, :size => size, :html => { :class => "gravie" })
+      gravatar_tag(user.email, :size => dimension, :html => { :class => "gravie" })
     end
   end
 
