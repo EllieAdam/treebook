@@ -1,6 +1,6 @@
 class Status < ActiveRecord::Base
   validates :content, presence: true, length: { minimum: 2 }
-  validates :user_id, presence: true
+  validates :user, presence: { message: "that actually exists must be assigned!" }
 
   has_many :comments, dependent: :destroy
   belongs_to :user

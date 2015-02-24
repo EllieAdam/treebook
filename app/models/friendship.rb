@@ -1,6 +1,12 @@
 class Friendship < ActiveRecord::Base
   include AASM
 
+  validates :state, presence: true
+  validates :user, presence: { message: "that actually exists must be assigned!" }
+  validates :friend, presence: { message: "that actually exists must be assigned!" }
+  validates :state, inclusion: { in: %w(pending requested accepted blocked),
+    message: "%{value} is not a valid state!" }
+
   belongs_to :user
   belongs_to :friend, class_name: 'User', foreign_key: 'friend_id'
 

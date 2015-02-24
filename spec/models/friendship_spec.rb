@@ -4,9 +4,55 @@ RSpec.describe Friendship, :type => :model do
   let(:boss) { create(:user) }
   let(:worker) { create(:user) }
 
-  describe "has proper model relationships" do
+  describe "association" do
     it { should belong_to(:user) }
     it { should belong_to(:friend) }
+  end
+
+  describe "validation" do
+    it { should validate_presence_of(:state) }
+
+    it "accepts known relationship state" do
+      friendship = Friendship.create(user_id: boss.id, friend_id: worker.id, state: 'pending')
+      expect(friendship).to be_valid
+      friendship.valid?
+      expect(friendship.errors[:state]).to be_empty
+    end
+
+    it "rejects unknown relationship state" do
+      friendship = Friendship.create(user_id: boss.id, friend_id: worker.id, state: 'nice')
+      expect(friendship).to_not be_valid
+      friendship.valid?
+      expect(friendship.errors[:state]).to include('nice is not a valid state!')
+    end
+
+    it "accepts a relationship with an existing user assigned" do
+      friendship = Friendship.create(user_id: boss.id, friend_id: worker.id, state: 'pending')
+      expect(friendship).to be_valid
+      friendship.valid?
+      expect(friendship.errors[:user]).to be_empty
+    end
+
+    it "rejects a relationship with a nonexistent user assigned" do
+      friendship = Friendship.create(user_id: 666, friend_id: worker.id, state: 'pending')
+      expect(friendship).to_not be_valid
+      friendship.valid?
+      expect(friendship.errors[:user]).to include('that actually exists must be assigned!')
+    end
+
+    it "accepts a relationship with an existing friend assigned" do
+      friendship = Friendship.create(user_id: boss.id, friend_id: worker.id, state: 'pending')
+      expect(friendship).to be_valid
+      friendship.valid?
+      expect(friendship.errors[:friend]).to be_empty
+    end
+
+    it "rejects a relationship with a nonexistent friend assigned" do
+      friendship = Friendship.create(user_id: boss.id, friend_id: 666, state: 'pending')
+      expect(friendship).to_not be_valid
+      friendship.valid?
+      expect(friendship.errors[:friend]).to include('that actually exists must be assigned!')
+    end
   end
 
   describe "frienship manipulation" do

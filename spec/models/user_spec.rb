@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
   describe "relationships" do
     it { should have_many(:statuses) }
+    it { should have_many(:comments) }
     it { should have_many(:friendships) }
     it { should have_many(:friends) }
     it { should have_many(:pending_friendships) }
@@ -11,6 +12,8 @@ RSpec.describe User, :type => :model do
     it { should have_many(:requested_friends) }
     it { should have_many(:blocked_friendships) }
     it { should have_many(:blocked_friends) }
+    it { should have_many(:accepted_friendships) }
+    it { should have_many(:accepted_friends) }
   end
 
   describe "validations" do

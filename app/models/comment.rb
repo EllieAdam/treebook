@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   validates :body, presence: true
-  validates :user_id, presence: true
-  validates :status_id, presence: true
+  validates :user, presence: { message: "that actually exists must be assigned!" }
+  validates :status, presence: { message: "that actually exists must be assigned!" }
 
   belongs_to :user
   belongs_to :status

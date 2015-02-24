@@ -1,4 +1,19 @@
 class User < ActiveRecord::Base
+  validates :name, presence: true, uniqueness: true
+
+  has_many :statuses
+  has_many :comments
+  has_many :friendships, dependent: :destroy
+  has_many :friends, -> { where(friendships: { state: 'accepted' }).order('name DESC') }, :through => :friendships
+  has_many :pending_friendships, -> { where(state: 'pending') }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :pending_friends, through: :pending_friendships, source: :friend
+  has_many :requested_friendships, -> { where(state: 'requested') }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :requested_friends, through: :requested_friendships, source: :friend
+  has_many :blocked_friendships, -> { where(state: 'blocked') }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :blocked_friends, through: :blocked_friendships, source: :friend
+  has_many :accepted_friendships, -> { where(state: 'accepted') }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :accepted_friends, through: :accepted_friendships, source: :friend
+
   has_attached_file :image,
               styles: { icon: "28x28^", small: "74x74^", medium: "100x100^" },
               convert_options: {
@@ -11,31 +26,14 @@ class User < ActiveRecord::Base
               s3_host_alias: 'd3qsrkjdadnces.cloudfront.net',
               bucket: ENV['S3_BUCKET'],
               path: "images/:class/:basename_:id.:style.:extension"
+  validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   acts_as_voter
   acts_as_paranoid
 
-  validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
-  validates :name, presence: true, uniqueness: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-
-  has_many :statuses
-  has_many :friendships, dependent: :destroy
-  has_many :friends, -> { where(friendships: { state: 'accepted' }).order('name DESC') }, :through => :friendships
-
-  has_many :pending_friendships, -> { where(state: 'pending') }, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :pending_friends, through: :pending_friendships, source: :friend
-
-  has_many :requested_friendships, -> { where(state: 'requested') }, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :requested_friends, through: :requested_friendships, source: :friend
-
-  has_many :blocked_friendships, -> { where(state: 'blocked') }, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :blocked_friends, through: :blocked_friendships, source: :friend
-
-  has_many :accepted_friendships, -> { where(state: 'accepted') }, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :accepted_friends, through: :accepted_friendships, source: :friend
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
