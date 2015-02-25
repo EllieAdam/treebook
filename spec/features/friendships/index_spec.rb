@@ -16,7 +16,7 @@ feature "Friendship index page" do
   scenario "shows all logged-in user's friendships" do
     visit friendships_path
     expect(page).to have_content("Pending")
-    expect(page).to have_content("Active")
+    expect(page).to have_content("Accepted")
     expect(page).to have_content("Requested")
   end
 

@@ -14,10 +14,10 @@ feature "Deleting friendship" do
     visit edit_friendship_path(@friendship)
     click_button "Cancel Friendship"
     expect(page).to have_content("You are no longer friends.")
-    expect(page).to have_content("There are no friendships to view! Don't be shy, add some friends :)")
+    expect(page).to have_content("There are no friendships to view!")
     log_out(@user)
     log_in(@user2)
     visit friendships_path
-    expect(page).to have_content("There are no friendships to view! Don't be shy, add some friends :)")
+    expect(page).to have_content("There are no friendships to view!")
   end
 end

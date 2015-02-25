@@ -1,37 +1,64 @@
-<h2>Friends List</h2>
-
-<div class="list-buttons">
-  <%= link_to "All", friendships_path, class: "btn btn-sm btn-default" %>
-  <%= link_to "Active", friendships_path(list: 'accepted'), class: "btn btn-sm btn-default" %>
-  <%= link_to "Pending", friendships_path(list: 'pending'), class: "btn btn-sm btn-default" %>
-  <%= link_to "Requested", friendships_path(list: 'requested'), class: "btn btn-sm btn-default" %>
-  <%= link_to "Blocked", friendships_path(list: 'blocked'), class: "btn btn-sm btn-default" %>
-</div>
-
-<div>
-  <% if @friendships.empty? %>
-  <p>There are no friendships to view! Don't be shy, add some friends :)</p>
-  <% end %>
-
-  <table class="friendship">
-    <% @friendships.each do |friendship| %>
-    <% friend = friendship.friend %>
-    <tr id="<%= dom_id(friendship) %>">
-      <td>
-        <%= image_for(friend, :icon, 28) %> <!-- Find me in application_helper -->
-      </td>
-      <td>
-        <strong><%= link_to friend.name, profiles_path(friend) %></strong>
-      </td>
-      <td>
-        <p class="<%= friendship.state_color_class %>"><%= friendship.friendship_state %></p>
-      </td>
-      <td>
-        <% unless friendship.blocked? %>
-          <%= link_to 'Edit', edit_friendship_path(friendship), class: "btn btn-xs btn-warning" %>
+<div class="col-lg-6">
+  <h2>Friends List</h2>
+  <div class="bs-component">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#all" data-toggle="tab" aria-expanded="true">All</a></li>
+      <li class=""><a href="#accepted" data-toggle="tab" aria-expanded="false">Accepted</a></li>
+      <li class=""><a href="#pending" data-toggle="tab" aria-expanded="false">Pending</a></li>
+      <li class=""><a href="#requested" data-toggle="tab" aria-expanded="false">Requested</a></li>
+      <li class=""><a href="#blocked" data-toggle="tab" aria-expanded="false">Blocked</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="all">
+        <% if @friendships.empty? %>
+          <p>There are no friendships to view!</p>
         <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+        <table class="friendship">
+          <% @friendships.each do |friendship| %>
+            <%= render partial: 'friendship', locals: { friendship: friendship } %>
+          <% end %>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="accepted">
+        <table class="friendship">
+          <% if @accepted_friendships.empty? %>
+            <p>There are no friendships to view!</p>
+          <% end %>
+          <% @accepted_friendships.each do |friendship| %>
+            <%= render partial: 'friendship', locals: { friendship: friendship } %>
+          <% end %>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="pending">
+        <table class="friendship">
+          <% if @pending_friendships.empty? %>
+            <p>There are no friendships to view!</p>
+          <% end %>
+          <% @pending_friendships.each do |friendship| %>
+            <%= render partial: 'friendship', locals: { friendship: friendship } %>
+          <% end %>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="requested">
+        <table class="friendship">
+          <% if @requested_friendships.empty? %>
+            <p>There are no friendships to view!</p>
+          <% end %>
+          <% @requested_friendships.each do |friendship| %>
+            <%= render partial: 'friendship', locals: { friendship: friendship } %>
+          <% end %>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="blocked">
+        <table class="friendship">
+          <% if @blocked_friendships.empty? %>
+            <p>There are no friendships to view!</p>
+          <% end %>
+          <% @blocked_friendships.each do |friendship| %>
+            <%= render partial: 'friendship', locals: { friendship: friendship } %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

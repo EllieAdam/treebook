@@ -3,8 +3,11 @@ class FriendshipsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @friendships = FriendshipDecorator.decorate_collection(friendship_association.all)
-    respond_with @friendships
+    @friendships = FriendshipDecorator.decorate_collection(current_user.friendships)
+    @blocked_friendships = FriendshipDecorator.decorate_collection(current_user.blocked_friendships)
+    @pending_friendships = FriendshipDecorator.decorate_collection(current_user.pending_friendships)
+    @requested_friendships = FriendshipDecorator.decorate_collection(current_user.requested_friendships)
+    @accepted_friendships = FriendshipDecorator.decorate_collection(current_user.accepted_friendships)
   end
 
   def accept
@@ -84,15 +87,7 @@ class FriendshipsController < ApplicationController
   def friendship_association
     case params[:list]
     when nil
-      @friendships = current_user.friendships
-    when 'blocked'
-      @friendships = current_user.blocked_friendships
-    when 'pending'
-      @friendships = current_user.pending_friendships
-    when 'requested'
-      @friendships = current_user.requested_friendships
-    when 'accepted'
-      @friendships = current_user.accepted_friendships
+
     end
   end
 
