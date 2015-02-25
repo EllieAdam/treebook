@@ -1,4 +1,3 @@
-<% if current_user && !current_user.has_blocked?(status.user) %>
 <div class="status" id="<%= dom_id(status) %>">
   <div class="row">
 
@@ -11,7 +10,11 @@
 
       <span class="dimmed date"><%= time_ago_in_words(status.created_at) %> ago</span>
 
-      <%= render partial: 'options', locals: { status: status } %>
+      <div class="btn-group pull-right status-options">
+        <% if current_user && (status.user == current_user || current_user.admin == true) %>
+          <%= render partial: 'options', locals: { status: status } %>
+        <% end %>
+      </div>
 
       <p><%= status.content %></p>
 
@@ -22,4 +25,3 @@
 
   </div>
 </div>
-<% end %>

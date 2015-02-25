@@ -2,7 +2,6 @@
 
 Social media app based on an outdated Treehouse course, completely rewritten and translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
 
-* Scope statuses instead of hiding blocked user statuses in views
 * Make Friendship listing more dynamic
 * Implement a working mailer
 * Work on profile pages (more info from users? bio? favorite quote?)
