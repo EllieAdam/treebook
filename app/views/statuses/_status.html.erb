@@ -15,7 +15,7 @@
 
       <p><%= status.content %></p>
 
-      <%= link_to pluralize(status.comments.size, 'comment'), status, class: "dimmed" %>
+      <%= link_to pluralize(status.comments_count, 'comment'), status, class: "dimmed" %>
 
       <%= render partial: 'voting', locals: { status: status } %>
     </div>

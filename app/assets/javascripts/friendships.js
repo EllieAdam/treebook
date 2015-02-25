@@ -1,17 +1,17 @@
-window.userFriendships = [];
+// window.userFriendships = [];
 
 var friendshipsReady;
 
 friendshipsReady = function() {
 
-  $.ajax({
-    url: Routes.friendships_path({format: 'json'}),
-    dataType: 'json',
-    type: 'GET',
-    success: function(data) {
-      window.userFriendships = data;
-    }
-  });
+  // $.ajax({
+  //   url: Routes.friendships_path({format: 'json'}),
+  //   dataType: 'json',
+  //   type: 'GET',
+  //   success: function(data) {
+  //     window.userFriendships = data;
+  //   }
+  // });
 
   $('#add-friendship').click(function(event) {
     event.preventDefault();

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222231513) do
+ActiveRecord::Schema.define(version: 20150225130210) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150222231513) do
     t.integer  "user_id"
     t.integer  "cached_votes_up",   default: 0
     t.integer  "cached_votes_down", default: 0
+    t.integer  "comments_count",    default: 0, null: false
   end
 
   add_index "statuses", ["cached_votes_down"], name: "index_statuses_on_cached_votes_down"
