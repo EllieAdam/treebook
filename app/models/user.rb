@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
               bucket: ENV['S3_BUCKET'],
               path: "images/:class/:basename_:id.:style.:extension"
   validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+  validates_attachment_size :image, :in => 0.megabytes..1.megabytes
 
   acts_as_voter
   acts_as_paranoid

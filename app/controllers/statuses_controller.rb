@@ -3,6 +3,7 @@ class StatusesController < ApplicationController
   before_action :all_statuses, only: [:index, :create, :update, :destroy]
   before_action :set_status, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :owner?, only: [:edit, :update, :destroy]
+  before_action :is_blocked?, only: [:show, :upvote, :downvote]
 
   respond_to :html, :js
 
@@ -82,5 +83,9 @@ class StatusesController < ApplicationController
     unless @status.user == current_user || current_user.admin == true
       redirect_to statuses_path, error: "You are not allowed to do that"
     end
+  end
+
+  def is_blocked?
+    redirect_to statuses_path, error: "Can't interact with blocked user's statuses." if current_user.has_blocked?(@status.user)
   end
 end
