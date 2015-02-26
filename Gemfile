@@ -22,6 +22,10 @@ gem 'gravatarify', '~> 3.0'
 gem 'paperclip', '~> 4.2'
 gem 'foreman'
 gem 'puma'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'oauth2'
+gem "omniauth-google-oauth2"
 
 group :development do
   gem 'quiet_assets', '~> 1.1'
@@ -48,7 +52,7 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'did_you_mean', '~> 0.9'
+  gem 'did_you_mean'
   gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails', '~> 4.5'
 end

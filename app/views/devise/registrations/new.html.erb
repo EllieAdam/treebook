@@ -4,6 +4,16 @@
 <div class="col-lg-6">
   <div class="well bs-component">
 
+    <div class="omni">
+      <%= link_to user_omniauth_authorize_path(:google_oauth2), class: 'btn btn-default btn-md btn-google' do %>
+        <i class="fa fa-google-plus-square"></i> Sign in with Google
+      <% end %>
+      <span id="orr"> </span>
+      <%= link_to user_omniauth_authorize_path(:facebook), class: 'btn btn-default btn-md btn-facebook' do %>
+        <i class="fa fa-facebook-square"></i> Sign in with Facebook
+      <% end %>
+    </div>
+
     <fieldset>
       <legend>Register Account</legend>
 

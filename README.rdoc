@@ -2,10 +2,12 @@
 
 Social media app based on an outdated Treehouse course, completely rewritten and translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
 
-* Make Friendship listing more dynamic
+* Allow users to get avatars from URLs
+* Allow users to remove avatars
+* Get FB or Google avatar when signing in with Omniauth
+* Disable Settings form when using Omniauth
 * Implement a working mailer
 * Work on profile pages (more info from users? bio? favorite quote?)
-* Add OmniAuth for Google and Facebook
 * ...
 
 Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com
@@ -27,4 +29,5 @@ Some major differences compared to the original project:
 * Status pagination with will_paginate gem
 * Avatar uploads using paperclip gem
 * Integration with S3 uploads and CloudFront CDN
+* Facebook and Google sign in using Omniauth
 * ...
