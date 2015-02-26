@@ -25,7 +25,8 @@ gem 'puma'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'oauth2'
-gem "omniauth-google-oauth2"
+gem 'omniauth-google-oauth2'
+gem 'annotate', '~> 2.6.5'
 
 group :development do
   gem 'quiet_assets', '~> 1.1'
