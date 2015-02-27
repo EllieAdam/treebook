@@ -65,9 +65,9 @@ class StatusesController < ApplicationController
     # Omit all statuses created by current user's list of blocked users
     if current_user.blocked_friends.any?
       @blocked_user_ids = current_user.blocked_friends.pluck(:id)
-      @statuses = Status.where('user_id NOT IN (?)', @blocked_user_ids).page(params[:page]).order('created_at DESC')
+      @statuses = Status.where('user_id NOT IN (?)', @blocked_user_ids).page(params[:page]).order('id DESC')
     else
-      @statuses = Status.page(params[:page]).order('created_at DESC')
+      @statuses = Status.page(params[:page]).order('id DESC')
     end
   end
 

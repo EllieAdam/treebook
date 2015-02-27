@@ -4,6 +4,6 @@ class ProfilesController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
     @friendship = current_user.friendships.where(friend_id: @user).first
-    @statuses = @user.statuses.order('created_at desc')
+    @statuses = @user.statuses.order('id desc')
   end
 end
