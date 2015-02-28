@@ -11,6 +11,12 @@
 #  cached_votes_down :integer          default("0")
 #  comments_count    :integer          default("0"), not null
 #
+# Indexes
+#
+#  index_statuses_on_cached_votes_down  (cached_votes_down)
+#  index_statuses_on_cached_votes_up    (cached_votes_up)
+#  index_statuses_on_user_id            (user_id)
+#
 
 class Status < ActiveRecord::Base
   validates :content, presence: true, length: { minimum: 2 }

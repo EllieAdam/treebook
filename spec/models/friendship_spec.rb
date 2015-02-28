@@ -9,6 +9,11 @@
 #  updated_at :datetime         not null
 #  state      :string
 #
+# Indexes
+#
+#  index_friendships_on_state                  (state)
+#  index_friendships_on_user_id_and_friend_id  (user_id,friend_id)
+#
 
 require 'rails_helper'
 

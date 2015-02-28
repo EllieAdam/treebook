@@ -9,6 +9,11 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_comments_on_status_id  (status_id)
+#  index_comments_on_user_id    (user_id)
+#
 
 class Comment < ActiveRecord::Base
   validates :body, presence: true
