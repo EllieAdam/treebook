@@ -3,11 +3,14 @@ class FriendshipsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @friendships = FriendshipDecorator.decorate_collection(current_user.friendships)
-    @blocked_friendships = FriendshipDecorator.decorate_collection(current_user.blocked_friendships)
-    @pending_friendships = FriendshipDecorator.decorate_collection(current_user.pending_friendships)
-    @requested_friendships = FriendshipDecorator.decorate_collection(current_user.requested_friendships)
-    @accepted_friendships = FriendshipDecorator.decorate_collection(current_user.accepted_friendships)
+    @blocked_friendships, @pending_friendships, @requested_friendships, @accepted_friendships = [], [], [], []
+    @friendships = current_user.friendships.includes(:friend).decorate
+    @friendships.each do |f|
+      @blocked_friendships << f if f.state == 'blocked'
+      @pending_friendships << f if f.state == 'pending'
+      @requested_friendships << f if f.state == 'requested'
+      @accepted_friendships << f if f.state == 'accepted'
+    end
   end
 
   def accept

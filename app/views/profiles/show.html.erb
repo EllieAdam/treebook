@@ -30,9 +30,5 @@
 <div class="status">
   <p><%= status.content %></p>
   <%= link_to time_ago_in_words(status.created_at) + " ago", status, class: "dimmed" %>
-  <% if current_user && (status.user == current_user || current_user.admin == true) %>
-  <span class="admin">
-  </span>
-  <% end %>
 </div>
 <% end %>

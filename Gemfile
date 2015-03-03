@@ -33,6 +33,8 @@ group :development do
   gem 'quiet_assets', '~> 1.1'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'lol_dba'
+  gem 'bullet'
 end
 
 group :test do
@@ -43,10 +45,6 @@ group :test do
   gem 'shoulda-matchers', '~> 2.7', require: false
   gem 'capybara-email', '~> 2.4'
   gem 'capybara-webkit', '~> 1.4'
-end
-
-group :development, :production do
-  gem 'aws-sdk', '< 2'
 end
 
 group :development, :test do
@@ -62,6 +60,11 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'pg'
+end
+
+group :development, :production do
+  gem 'aws-sdk', '< 2'
+  gem 'rack-mini-profiler'
 end
 
 ruby '2.2.0'

@@ -23,7 +23,7 @@ class Status < ActiveRecord::Base
   validates :user, presence: { message: "that actually exists must be assigned!" }
 
   has_many :comments, dependent: :destroy
-  belongs_to :user
+  belongs_to :user, -> { with_deleted }
 
   acts_as_votable
 
