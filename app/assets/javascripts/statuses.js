@@ -1,6 +1,4 @@
-var ready;
-
-ready = function() {
+$(document).on('ready page:load statusesLoaded', function() {
   $(".uppie, .downie").click( function() {
     if ($(this).hasClass('highlighted')) {
       $(this).removeClass('highlighted');
@@ -9,8 +7,4 @@ ready = function() {
       $(this).addClass('highlighted');
     }
   });
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
-$(document).on('statusesLoaded', ready);
+});

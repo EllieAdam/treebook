@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'bootswatch-rails', '~> 3.2'
 gem 'sass-rails', '~> 5.0'
@@ -68,4 +68,4 @@ group :development, :production do
   gem 'rack-mini-profiler'
 end
 
-ruby '2.2.0'
+ruby '2.2.1'
