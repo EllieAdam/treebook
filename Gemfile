@@ -21,7 +21,7 @@ gem 'paranoia'
 gem 'gravatarify', '~> 3.0'
 gem 'paperclip', '~> 4.2'
 gem 'foreman'
-gem 'puma'
+gem "passenger"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'oauth2'
