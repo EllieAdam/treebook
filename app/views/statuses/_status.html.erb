@@ -1,26 +1,49 @@
 <div class="status" id="<%= dom_id(status) %>">
   <div class="row">
 
-    <div class="col-sm-2 col-md-1 col-lg-1">
-      <%= image_for(status.user, :small, 74) %> <!-- Find me in application_helper -->
+    <div class="col-avatar col-md-1 col-sm-2 col-xs-2">
+      <%= image_for(status.user, :small, 70) %> <!-- Find me in application_helper -->
     </div>
 
-    <div class="col-sm-10 col-md-11 col-lg-11">
-      <strong><%= name_for(status.user) %></strong>
+    <div class="col-md-11 col-sm-10 col-xs-10">
 
-      <span class="dimmed date"><%= time_ago_in_words(status.created_at) %> ago</span>
-
-      <div class="btn-group pull-right status-options">
-        <% if current_user && (status.user == current_user || current_user.admin == true) %>
-          <%= render partial: 'options', locals: { status: status } %>
-        <% end %>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-11">
+            <strong><%= name_for(status.user) %></strong>
+            <span class="dimmed date"><%= time_ago_in_words(status.created_at) %> ago</span>
+          </div>
+          <div class="col-lg-1 options">
+            <div class="btn-group">
+              <% if current_user && (status.user == current_user || current_user.admin == true) %>
+              <%= render partial: 'options', locals: { status: status } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <p><%= status.content %></p>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-12">
+            <p>
+              <%= status.content %>
+            </p>
+          </div>
+        </div>
+      </div>
 
-      <%= link_to pluralize(status.comments_count, 'comment'), status, class: "dimmed" %>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-md-10">
+            <%= link_to pluralize(status.comments_count, 'comment'), status, class: "dimmed" %>
+          </div>
+          <div class="col-md-2 options">
+            <%= render partial: 'voting', locals: { status: status } %>
+          </div>
+        </div>
+      </div>
 
-      <%= render partial: 'voting', locals: { status: status } %>
     </div>
 
   </div>

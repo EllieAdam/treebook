@@ -29,6 +29,7 @@ gem 'omniauth-google-oauth2'
 gem 'annotate', '~> 2.6.5'
 gem 'awesome_print'
 gem 'newrelic_rpm'
+gem 'public_activity'
 
 group :development do
   gem 'quiet_assets', '~> 1.1'

@@ -1,11 +1,29 @@
-<h2>Status Feed</h2>
+<div class="row">
 
-<div id="status-maker">
-  <%= link_to new_status_path, class: "btn btn-default submitter", remote: true do %>
-    <i class="fa fa-plus"></i> New Status
-  <% end %>
+  <div class="col-sm-9">
+  <div id="status-header">
+      <h2>Status Feed</h2>
+    </div>
+    <div id="status-maker">
+      <%= link_to new_status_path, class: "btn btn-default submitter", remote: true do %>
+      <i class="fa fa-plus"></i> New Status
+      <% end %>
+    </div>
+
+    <div id="status-form" style="display:none;"></div>
+
+    <div id="statuses">
+      <%= render @statuses %>
+      <div class="stat">
+      </div>
+      <div class="row row-centered">
+        <%= will_paginate @statuses %>
+      </div>
+    </div>
+  </div>
+
+  <div class="feed col-sm-3">
+    <h4>Activity Feed</h4>
+  </div>
+
 </div>
-
-<div id="status-form" style="display:none;"></div>
-
-<div id="statuses"><%= render @statuses %><div class="stat"></div><div class="row row-centered"><%= will_paginate @statuses %></div></div>

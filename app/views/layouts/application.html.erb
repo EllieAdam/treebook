@@ -10,7 +10,7 @@
 </head>
 <body>
   <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="col-lg-12">
       <div class="navbar-header">
         <%= link_to "Treebook", "#", class: "navbar-brand" %>
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
@@ -72,10 +72,16 @@
   </nav>
 
 
-  <div class="main-content">
-    <div class="container">
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-10">
       <%= flash_messages %> <!-- Find me in helpers -->
       <%= yield %>
+    </div>
+
+    <div class="col-md-1">
     </div>
   </div>
 
