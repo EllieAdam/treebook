@@ -4,6 +4,7 @@ class StatusesController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :owner?, only: [:edit, :update, :destroy]
   before_action :is_blocked?, only: [:show, :upvote, :downvote]
+  before_action :load_activities, only: [:index, :create, :update, :destroy, :upvote, :downvote]
 
   respond_to :html, :js
 
@@ -44,22 +45,36 @@ class StatusesController < ApplicationController
   end
 
   def upvote
+    Status.public_activity_off
     if current_user.voted_up_on? @status
       @status.unliked_by current_user
+      Status.public_activity_on
+      @status.create_activity :unupvote
     else
       @status.upvote_by current_user
+      Status.public_activity_on
+      @status.create_activity :upvote
     end
   end
 
   def downvote
+    Status.public_activity_off
     if current_user.voted_down_on? @status
       @status.undisliked_by current_user
+      Status.public_activity_on
+      @status.create_activity :undownvote
     else
       @status.downvote_by current_user
+      Status.public_activity_on
+      @status.create_activity :downvote
     end
   end
 
   private
+
+  def load_activities
+    @activities = PublicActivity::Activity.order('created_at DESC').limit(20).includes(:owner).includes(:trackable)
+  end
 
   def all_statuses
     # Omit all statuses created by current user's list of blocked users

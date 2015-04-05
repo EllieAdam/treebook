@@ -8,6 +8,9 @@ Social media app based on an outdated Treehouse course, completely rewritten and
 * Disable Settings form when using Omniauth
 * Implement a working mailer
 * Work on profile pages (more info from users? bio? favorite quote?)
+* Activity feed for comments
+* Use I18n for activity feed
+* Hide activity feed entries from blocked users
 * ...
 
 Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com
@@ -30,4 +33,5 @@ Some major differences compared to the original project:
 * Avatar uploads using paperclip gem
 * Integration with S3 uploads and CloudFront CDN
 * Facebook and Google sign in using Omniauth
+* Activity feed for status actions
 * ...

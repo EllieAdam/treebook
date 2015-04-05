@@ -7,9 +7,9 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  user_id           :integer
-#  cached_votes_up   :integer          default("0")
-#  cached_votes_down :integer          default("0")
-#  comments_count    :integer          default("0"), not null
+#  cached_votes_up   :integer          default(0)
+#  cached_votes_down :integer          default(0)
+#  comments_count    :integer          default(0), not null
 #
 # Indexes
 #
@@ -19,6 +19,9 @@
 #
 
 class Status < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: Proc.new { |controller, model| controller.current_user ? controller.current_user : nil }
+
   validates :content, presence: true, length: { minimum: 2 }
   validates :user, presence: { message: "that actually exists must be assigned!" }
 

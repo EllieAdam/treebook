@@ -1,2 +1,3 @@
 $("#<%= @status.id %> .text-success").html("<%= @status.cached_votes_up %>");
 $("#<%= @status.id %> .text-danger").html("<%= @status.cached_votes_down %>");
+$('#activity-feed').html("<%= j (render_activities @activities) %>");

@@ -1,7 +1,7 @@
 <div class="row">
 
   <div class="col-sm-9">
-  <div id="status-header">
+    <div id="status-header">
       <h2>Status Feed</h2>
     </div>
     <div id="status-maker">
@@ -23,7 +23,10 @@
   </div>
 
   <div class="feed col-sm-3">
-    <h4>Activity Feed</h4>
+    <h4 id="activity-header">Activity Feed</h4>
+    <div id="activity-feed">
+      <%= render_activities @activities %>
+    </div>
   </div>
 
 </div>

@@ -1,0 +1,17 @@
+<hr>
+<p class="action">
+  <small class="text-muted"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
+  <strong>
+    <i class="fa fa-thumbs-up"></i>
+    <% if activity.owner %>
+      <%= link_to activity.owner.name, profiles_path(activity.owner) %>
+    <% else %>
+      Deleted user
+    <% end %>
+  </strong>
+  <% if a.trackable %>
+    upvoted a <%= link_to "status", status_path(a.trackable) %>.
+  <% else %>
+    upvoted a status that is now deleted.
+  <% end %>
+</p>
