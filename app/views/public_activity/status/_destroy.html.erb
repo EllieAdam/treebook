@@ -2,6 +2,7 @@
   <small class="text-muted"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
   <strong>
     <i class="fa fa-remove"></i>
+    &nbsp;
     <% if activity.owner %>
       <%= link_to activity.owner.name, profiles_path(activity.owner) %>
     <% else %>
