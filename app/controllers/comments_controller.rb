@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_status
+  before_action :load_activities
 
   respond_to :html
 
@@ -29,6 +30,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def load_activities
+    @activities = PublicActivity::Activity.order('created_at DESC').limit(15).includes(:owner).includes(:recipient).includes(:trackable)
+  end
 
   def set_status
     @status = Status.find(params[:status_id])

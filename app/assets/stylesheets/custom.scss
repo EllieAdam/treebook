@@ -7,31 +7,32 @@
   transition: background-color 0.6s;
 }
 
+.action {
+  transition: background-color 0.6s;
+  border-top: solid 1px #1C1E22;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+
+.action small {
+  display: inline-block;
+  padding-bottom: 3px;
+}
+
 .status.show {
   margin-top: 10px;
-  border-bottom: solid 1px #1C1E22;
-  border-right: solid 1px #1C1E22;
-  border-left: solid 1px #1C1E22;
+  border: solid 1px #1C1E22;
+}
+
+.status:hover, .comment:hover, .action:hover {
+  background-color: lighten(#272B30, 3%);
 }
 
 .stat {
   border-top: solid 1px #1C1E22;
 }
 
-.status .admin {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.5s linear, opacity 0.5s linear;
-}
-
-.status:hover .admin {
-  visibility:visible;
-  opacity: 1;
-}
-
-.status:hover, .comment:hover {
-  background-color: lighten(#272B30, 3%);
-}
 
 h2 {
   margin-top: 10px;

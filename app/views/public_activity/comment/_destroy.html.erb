@@ -1,0 +1,16 @@
+<p class="action">
+  <small class="text-muted"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
+  <strong>
+    <i class="fa fa-ban"></i>
+    <% if activity.owner %>
+    <%= link_to activity.owner.name, profiles_path(activity.owner) %>
+    <% else %>
+    Deleted user
+    <% end %>
+  </strong>
+  <% if activity.recipient %>
+    deleted a comment from a <%= link_to "status", status_path(activity.recipient) %>.
+  <% else %>
+    deleted a comment from a status that is now deleted.
+  <% end %>
+</p>

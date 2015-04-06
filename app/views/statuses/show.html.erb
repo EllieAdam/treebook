@@ -1,22 +1,66 @@
-<div class="status show" id="<%= dom_id(@status) %>">
-  <div class="row">
-    <div class="col-sm-2 col-md-1 col-lg-1">
-    <%= image_for(@status.user, :small, 74) %> <!-- Find me in application_helper -->
+<div class="row">
+
+  <div class="col-sm-9">
+    <div class="status show" id="<%= dom_id(@status) %>">
+      <div class="row">
+
+        <div class="col-avatar col-md-1 col-sm-2 col-xs-2">
+          <%= image_for(@status.user, :small, 70) %> <!-- Find me in application_helper -->
+        </div>
+
+        <div class="col-md-11 col-sm-10 col-xs-10">
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="col-lg-11">
+                <strong><%= name_for(@status.user) %></strong>
+                <span class="dimmed date"><%= time_ago_in_words(@status.created_at) %> ago</span>
+              </div>
+              <div class="col-lg-1 options">
+                <div class="btn-group">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="col-lg-12">
+                <p>
+                  <%= @status.content %>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="col-md-10">
+
+              </div>
+              <div class="col-md-2 options">
+                <%= render partial: 'voting', locals: { status: @status } %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
-    <div class="col-sm-10 col-md-11 col-lg-11">
+    <div>
+      <%= render @comments %>
+      <%= render partial: "comments/form" %>
+    </div>
 
-      <strong><%= name_for(@status.user) %></strong>
+  </div>
 
-      <span class="dimmed date">
-        <%= time_ago_in_words(@status.created_at) %> ago
-      </span>
-
-      <p><%= @status.content %></p>
-
-      <%= render partial: 'voting', locals: { status: @status } %>
-
+  <div class="feed col-sm-3">
+    <h4 id="activity-header">Activity Feed</h4>
+    <div id="activity-feed">
+      <%= render_activities @activities %>
     </div>
   </div>
+
 </div>
-<%= render @comments %>
-<%= render partial: "comments/form" %>

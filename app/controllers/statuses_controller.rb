@@ -4,7 +4,7 @@ class StatusesController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :owner?, only: [:edit, :update, :destroy]
   before_action :is_blocked?, only: [:show, :upvote, :downvote]
-  before_action :load_activities, only: [:index, :create, :update, :destroy, :upvote, :downvote]
+  before_action :load_activities, only: [:index, :show, :create, :update, :destroy, :upvote, :downvote]
 
   respond_to :html, :js
 
@@ -73,7 +73,7 @@ class StatusesController < ApplicationController
   private
 
   def load_activities
-    @activities = PublicActivity::Activity.order('created_at DESC').limit(20).includes(:owner).includes(:trackable)
+    @activities = PublicActivity::Activity.order('created_at DESC').limit(15).includes(:owner).includes(:recipient).includes(:trackable)
   end
 
   def all_statuses
