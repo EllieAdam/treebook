@@ -1,6 +1,8 @@
 == Treebook
 
-Social media app based on an outdated Treehouse course, completely rewritten and translated into Rails 4.2+ and RSpec 3+, ajaxified, with darker theme and additional features. To do:
+Social media app based on an outdated Treehouse course, completely rewritten and translated into Rails 4.2+ and RSpec 3+, modernized, ajaxified, with darker theme and additional features.
+
+To do:
 
 * Allow users to get avatars from URLs
 * Allow users to remove avatars
@@ -8,9 +10,10 @@ Social media app based on an outdated Treehouse course, completely rewritten and
 * Disable Settings form when using Omniauth
 * Implement a working mailer
 * Work on profile pages (more info from users? bio? favorite quote?)
-* Activity feed for comments
 * Use I18n for activity feed
 * Hide activity feed entries from blocked users
+* Ajaxify comments
+* Enable deleting and editing statuses in show view (+ ajaxify)
 * ...
 
 Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.com
@@ -18,13 +21,13 @@ Up-to-date live demo always available at: https://peaceful-tor-6610.herokuapp.co
 NOTE: If you want to run this locally, you need to rename the config/database.yml.sample file to config/database.yml
 and install Qt before even doing bundle install (capybara webkit needs it): https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
 
-Mailer temporarily disabled to prevent problems in production.
+NOTE 2: In order for Omniauth to work, you need to create your own G+/FB apps and set up properly named environment variables. The safe technique used in my deployment is described here: http://mczuchnowski.github.io/tutorials/2015/01/12/keeping-your-secrets-safe-in-rails/
 
-Some major differences compared to the original project:
+Some major differences compared to the original Treebook project:
 
 * Bootswatch Slate theme instead of vanilla Bootstrap
 * Aasm gem instead of state_machine gem which is no longer maintained
-* Friendly_id gem for creating unique slugs for users
+* Friendly_id gem for generating unique slugs for users
 * Gravatarify gem for taking care of Gravatars
 * RSpec/Factory Girl/Capybara/Capybara Webkit for testing
 * Lambdas instead of conditions in model relationships
@@ -33,5 +36,5 @@ Some major differences compared to the original project:
 * Avatar uploads using paperclip gem
 * Integration with S3 uploads and CloudFront CDN
 * Facebook and Google sign in using Omniauth
-* Activity feed for status actions
+* Activity feed for status and comment actions through public_activity gem
 * ...
