@@ -186,6 +186,12 @@ RSpec.describe StatusesController, :type => :controller do
           expect(assigns(:status)).to be_a(Status)
           expect(assigns(:status)).to be_persisted
         end
+
+        it "creates a new public activity object" do
+          expect(PublicActivity::Activity.count).to eq(0)
+          xhr :post, :create, {:status => valid_attributes}, valid_session
+          expect(PublicActivity::Activity.count).to eq(1)
+        end
       end
 
       describe "with invalid params" do
@@ -263,6 +269,13 @@ RSpec.describe StatusesController, :type => :controller do
           status = Status.create! valid_attributes
           xhr :put, :update, {:id => status.to_param, :status => valid_attributes}, valid_session
           expect(assigns(:status)).to eq(status)
+        end
+
+        it "creates a new public activity object" do
+          status = Status.create! valid_attributes
+          expect(PublicActivity::Activity.count).to eq(0)
+          xhr :put, :update, {:id => status.to_param, :status => valid_attributes}, valid_session
+          expect(PublicActivity::Activity.count).to eq(1)
         end
       end
 
@@ -365,6 +378,13 @@ RSpec.describe StatusesController, :type => :controller do
           xhr :delete, :destroy, {:id => status.to_param}, valid_session
         }.to change(Status, :count).by(-1)
       end
+
+      it "creates a new public activity object" do
+        status = Status.create! valid_attributes
+        expect{
+          xhr :put, :update, {:id => status.to_param, :status => valid_attributes}, valid_session
+          }.to change(PublicActivity::Activity, :count).by(1)
+      end
     end
 
     context "when logged in as admin" do
@@ -438,6 +458,13 @@ RSpec.describe StatusesController, :type => :controller do
           status.reload
         }.to change{ status.get_upvotes.size }.from(0).to(1)
       end
+
+      it "creates a new public activity object" do
+        status = Status.create! valid_attributes
+        expect{
+          xhr :put, :upvote, id: status.id
+          }.to change(PublicActivity::Activity, :count).by(1)
+      end
     end
   end
 
@@ -475,6 +502,13 @@ RSpec.describe StatusesController, :type => :controller do
           xhr :put, :downvote, id: status.id
           status.reload
         }.to change{ status.get_downvotes.size }.from(0).to(1)
+      end
+
+      it "creates a new public activity object" do
+        status = Status.create! valid_attributes
+        expect{
+          xhr :put, :downvote, id: status.id
+          }.to change(PublicActivity::Activity, :count).by(1)
       end
     end
   end

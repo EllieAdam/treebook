@@ -27,46 +27,45 @@ class StatusesController < ApplicationController
 
   def create
     @status = current_user.statuses.new(status_params)
-    unless @status.save
+    if @status.save
+      @status.create_activity :create, owner: current_user
+    else
       render action: 'new'
     end
   end
 
   def update
-    unless @status.update(status_params)
+    if @status.update(status_params)
+      @status.create_activity :update, owner: current_user
+    else
       render action: 'edit'
     end
   end
 
   def destroy
+    @status.create_activity :destroy, owner: current_user
     unless @status.destroy
       redirect_to statuses_path, error: 'Status could not be deleted.'
     end
   end
 
   def upvote
-    Status.public_activity_off
     if current_user.voted_up_on? @status
       @status.unliked_by current_user
-      Status.public_activity_on
-      @status.create_activity :unupvote
+      @status.create_activity :unupvote, owner: current_user
     else
       @status.upvote_by current_user
-      Status.public_activity_on
-      @status.create_activity :upvote
+      @status.create_activity :upvote, owner: current_user
     end
   end
 
   def downvote
-    Status.public_activity_off
     if current_user.voted_down_on? @status
       @status.undisliked_by current_user
-      Status.public_activity_on
-      @status.create_activity :undownvote
+      @status.create_activity :undownvote, owner: current_user
     else
       @status.downvote_by current_user
-      Status.public_activity_on
-      @status.create_activity :downvote
+      @status.create_activity :downvote, owner: current_user
     end
   end
 

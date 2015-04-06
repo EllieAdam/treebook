@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
     @comment = @status.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
+      @comment.create_activity :create, owner: current_user, recipient: @comment.status
       redirect_to @status, notice: "Comment added"
     else
       redirect_to @status, error: "Something went wrong"
@@ -22,6 +23,8 @@ class CommentsController < ApplicationController
       redirect_to @status, error: "You are not allowed to do that"
     end
 
+    @comment.create_activity :destroy, owner: current_user, recipient: @comment.status
+
     if @comment.destroy
       redirect_to @status, notice: "Comment removed"
     else
@@ -32,7 +35,7 @@ class CommentsController < ApplicationController
   private
 
   def load_activities
-    @activities = PublicActivity::Activity.order('created_at DESC').limit(15).includes(:owner).includes(:recipient).includes(:trackable)
+    @activities = PublicActivity::Activity.order('created_at DESC').limit(15).includes(:owner).includes(:recipient)
   end
 
   def set_status

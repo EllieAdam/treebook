@@ -19,8 +19,7 @@
 #
 
 class Status < ActiveRecord::Base
-  include PublicActivity::Model
-  tracked owner: Proc.new { |controller, model| controller.current_user ? controller.current_user : nil }
+  include PublicActivity::Common
 
   validates :content, presence: true, length: { minimum: 2 }
   validates :user, presence: { message: "that actually exists must be assigned!" }
