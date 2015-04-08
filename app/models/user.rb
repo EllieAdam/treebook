@@ -112,4 +112,12 @@ class User < ActiveRecord::Base
   def has_blocked?(other_user)
     blocked_friends.include?(other_user)
   end
+
+  def self.search(search)
+    if search
+      where('email = ?', "#{search.downcase}")
+    else
+      all
+    end
+  end
 end

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'profiles/:id' => 'profiles#show', as: 'profiles'
+  resources :activity_feed, only: :index
+
+  get 'profiles/:id' => 'profiles#show', as: 'profile'
+  get 'profiles' => 'profiles#index', as: 'profiles'
 
   as :user do
     get "/register", to: "devise/registrations#new", as: :register

@@ -1,7 +1,7 @@
 <% friend = friendship.friend %>
 <tr id="<%= dom_id(friendship) %>">
   <td><%= image_for(friend, :icon, 28) %></td>
-  <td><strong><%= link_to friend.name, profiles_path(friend) %></strong></td>
+  <td><strong><%= link_to friend.name, profile_path(friend) %></strong></td>
   <td><p class="<%= friendship.state_color_class %>"><%= friendship.friendship_state %></p></td>
   <td>
     <% unless friendship.blocked? %>

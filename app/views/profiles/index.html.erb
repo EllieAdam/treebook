@@ -1,0 +1,49 @@
+<div class="row">
+
+  <div class="col-sm-9">
+  <%= form_tag profiles_path, method: :get, id: "user-search" do %>
+    <p>
+      Find user by email:
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", name: nil %>
+      <%= link_to "Clear search", profiles_path %>
+    </p>
+    <% end %>
+
+    <div id="users">
+      <% @users.each do |user| %>
+
+      <div class="user">
+        <div class="row">
+          <div class="col-avatar col-md-1 col-sm-2 col-xs-2">
+            <%= image_for(user, :small, 70) %> <!-- Find me in application_helper -->
+          </div>
+          <div class="col-md-11 col-sm-10 col-xs-10">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="col-lg-11">
+                  <strong><%= name_for(user) %></strong><br />
+                  <span>Registered <%= time_ago_in_words(user.created_at) %> ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% end %>
+    </div>
+  </div>
+
+  <div class="feed col-sm-3">
+    <h4 id="activity-header">Activity Feed</h4>
+    <div id="activity-feed">
+      <%= render_activities @activities %>
+    </div>
+    <div class="text-center">
+      <i class="fa fa-arrow-right"></i>&nbsp;<%= link_to "See the whole feed", activity_feed_index_path %>
+    </div>
+  </div>
+</div>
+
+

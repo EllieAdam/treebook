@@ -6,7 +6,7 @@
     </div>
     <div id="status-maker">
       <%= link_to new_status_path, class: "btn btn-default submitter", remote: true do %>
-      <i class="fa fa-plus"></i> New Status
+      <i class="fa fa-plus"></i>&nbsp;&nbsp;New Status
       <% end %>
     </div>
 
@@ -27,6 +27,8 @@
     <div id="activity-feed">
       <%= render_activities @activities %>
     </div>
+    <div class="text-center">
+      <i class="fa fa-arrow-right"></i>&nbsp;<%= link_to "See the whole feed", activity_feed_index_path %>
+    </div>
   </div>
-
 </div>

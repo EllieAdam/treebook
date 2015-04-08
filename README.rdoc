@@ -42,4 +42,5 @@ To do:
 * Hide activity feed entries from blocked users
 * Ajaxify comments
 * Enable deleting and editing statuses in show view (+ ajaxify)
+* Enable searching for users by name and/or email
 * ...

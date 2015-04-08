@@ -9,7 +9,7 @@ feature "Accepting friendship" do
   end
 
   scenario "makes both friendships accepted", :js => true do
-    visit profiles_path(@user2)
+    visit profile_path(@user2)
     click_link "Add Friend"
 
     log_out(@user)

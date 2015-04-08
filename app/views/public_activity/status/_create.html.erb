@@ -4,7 +4,7 @@
     <i class="fa fa-plus"></i>
     &nbsp;
     <% if activity.owner %>
-      <%= link_to activity.owner.name, profiles_path(activity.owner) %>
+      <%= link_to activity.owner.name, profile_path(activity.owner) %>
     <% else %>
       Deleted user
     <% end %>

@@ -14,7 +14,7 @@
             <span class="dimmed date"><%= time_ago_in_words(status.created_at) %> ago</span>
           </div>
           <div class="col-lg-1 options">
-            <div class="btn-group">
+            <div class="btn-group status-options">
               <% if current_user && (status.user == current_user || current_user.admin == true) %>
               <%= render partial: 'options', locals: { status: status } %>
               <% end %>

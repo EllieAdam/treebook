@@ -30,7 +30,7 @@ module ApplicationHelper
     if user.deleted_at
       content_tag(:span, 'DELETED USER')
     else
-      link_to(user.name, profiles_path(user))
+      link_to(user.name, profile_path(user))
     end
   end
 end
