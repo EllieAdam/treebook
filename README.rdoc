@@ -25,7 +25,7 @@ Some major differences compared to the original Treebook project:
 * Avatar uploads using paperclip gem
 * Integration with S3 uploads and CloudFront CDN for serving (http://mczuchnowski.github.io/quick%20tips/2015/03/18/amazon-s3-is-for-storing-assets-not-serving-them/)
 * Facebook and Google sign in using Omniauth
-* Activity feed for status and comment actions through public_activity gem
+* Activity feed for status, user and comment actions through public_activity gem
 * Code optimizations, such as eager loading and counter cache
 * Phusion Passenger 5 server (before that - Puma)
 * ...
@@ -38,9 +38,7 @@ To do:
 * Disable Settings form when using Omniauth
 * Implement a working mailer
 * Work on profile pages (more info from users? bio? favorite quote?)
-* Use I18n for activity feed
 * Hide activity feed entries from blocked users
 * Ajaxify comments
 * Enable deleting and editing statuses in show view (+ ajaxify)
-* Enable searching for users by name and/or email
 * ...

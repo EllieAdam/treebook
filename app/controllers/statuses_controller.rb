@@ -5,6 +5,7 @@ class StatusesController < ApplicationController
   before_action :owner?, only: [:edit, :update, :destroy]
   before_action :is_blocked?, only: [:show, :upvote, :downvote]
   before_action :load_activities, only: [:index, :show, :create, :update, :destroy, :upvote, :downvote]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_status
 
   respond_to :html, :js
 
@@ -101,5 +102,9 @@ class StatusesController < ApplicationController
 
   def is_blocked?
     redirect_to statuses_path, error: "Can't interact with blocked user's statuses." if current_user.has_blocked?(@status.user)
+  end
+
+  def invalid_status
+    redirect_to statuses_url, error: "Status not found"
   end
 end

@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
   respond_to :html, :json
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_friendship
 
   def index
     @blocked_friendships, @pending_friendships, @requested_friendships, @accepted_friendships = [], [], [], []
@@ -94,4 +95,7 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def invalid_friendship
+    redirect_to friendships_url, error: "Friendship not found"
+  end
 end
