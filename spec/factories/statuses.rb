@@ -22,6 +22,7 @@ FactoryGirl.define do
 
   factory :status do
     content { Faker::Lorem.sentence }
+    association :user, factory: :user
   end
 
 end
