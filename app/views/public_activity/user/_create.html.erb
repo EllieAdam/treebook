@@ -1,0 +1,12 @@
+<p class="action">
+  <small class="text-muted"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
+  <strong>
+    <i class="fa fa-user"></i>
+    &nbsp;
+    <% if a.trackable %>
+      <%= link_to a.trackable.name, profile_path(a.trackable) %> registered.
+    <% else %>
+      A user that no longer exists registered.
+    <% end %>
+  </strong>
+</p>

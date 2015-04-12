@@ -35,6 +35,7 @@
 #
 
 class User < ActiveRecord::Base
+  include PublicActivity::Common
   validates :name, presence: true, uniqueness: true
 
   has_many :statuses

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     delete "/logout", to: "devise/sessions#destroy", as: :logout
   end
 
-  devise_for :users, skip: [:sessions], :controllers => { :omniauth_callbacks => "callbacks" }
+  devise_for :users, skip: [:sessions], controllers: { omniauth_callbacks: "callbacks", registrations: "registrations" }
 
   as :user do
     get "/login" => "devise/sessions#new", as: :new_user_session
